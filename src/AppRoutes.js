@@ -1,9 +1,9 @@
 import { Route, Routes } from "react-router-dom";
-import { Home } from "./src/pages/home";
-import { NoMatch } from "./src/pages/NoMatch";
-import { Recipe } from "./src/pages/Recipe";
-import { Search } from "./src/pages/Search";
-import { RecipeDashboard } from "./src/pages/RecipeDashboard";
+import { Home } from "./pages/Home";
+import { NoMatch } from "./pages/NoMatch";
+import { Recipe } from "./pages/Recipe";
+import { Search } from "./pages/Search";
+import { RecipeDashboard } from "./pages/RecipeDashboard";
 
 export const AppRoutes = () => {
   return (
