@@ -1,5 +1,5 @@
 import { HeroBanner } from "../components/home/HeroBanner";
-import { useAxios } from "../hooks/useAxios";
+import { useRecipeSearch } from "../hooks/useRecipeSearch";
 
 export const Home = () => {
   const query = "burgers";
@@ -14,11 +14,11 @@ export const Home = () => {
     sortDirection: "asc",
   };
 
-  /* const { data, isLoading, error } = useAxios(query, filters);
+  /*   const { data, isLoading, error } = useRecipeSearch(query, filters);
 
   console.log(data);
-  error && console.log(error); */
-
+  error && console.log(error);
+ */
   return (
     <div className="min-w-screen min-h-screen">{/* <HeroBanner /> */}</div>
   );

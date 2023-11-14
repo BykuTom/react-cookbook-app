@@ -4,13 +4,33 @@ import axios from "axios";
 const SPOONACULAR_URL =
   "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/complexSearch";
 
-export const useAxios = (query, filters) => {
+export const useRecipeSearch = (query, filters) => {
   const [data, setData] = useState();
   const [error, setError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (query) {
+      const params = {
+        query: query,
+        instructionsRequired: "true",
+        addRecipeInformation: "true",
+        number: "100",
+        limitLicense: "false",
+        ...(filters.cuisine && { cuisine: filters.cuisine }),
+        ...(filters.diet && { diet: filters.diet }),
+        ...(filters.intolerances && { intolerances: filters.intolerances }),
+        ...(filters.mealType && { type: filters.mealType }),
+        ...(filters.includeIngredients && {
+          includeIngredients: filters.includeIngredients,
+        }),
+        ...(filters.excludeIngredients && {
+          excludeIngredients: filters.excludeIngredients,
+        }),
+        ...(filters.sort && { sort: filters.sort }),
+        ...(filters.sortDirection && { sortDirection: filters.sortDirection }),
+      };
+
       const fetchData = async () => {
         setIsLoading(true);
 
@@ -20,25 +40,8 @@ export const useAxios = (query, filters) => {
               "X-RapidAPI-Key": process.env.REACT_APP_X_RapidAPI_Key,
               "X-RapidAPI-Host": process.env.REACT_APP_X_RAPID_API_HOST,
             },
-            params: {
-              query: query,
-              cuisine: filters.cuisine,
-              /*  diet: filters.diet, */
-              intolerances: filters.intolerances,
-              type: filters.mealType,
-              includeIngredients: filters.includeIngredients,
-              excludeIngredients: filters.excludeIngredients,
-              instructionsRequired: "true",
-              addRecipeInformation: "true",
-              sort: filters.sort,
-              sortDirection: filters.sortDirection,
-              number: "100",
-
-              limitLicense: "false",
-            },
+            params: params,
           });
-
-          /*           const response = mockSearchResponse; */
 
           if (response.status !== 200) {
             setError(true);
@@ -57,7 +60,7 @@ export const useAxios = (query, filters) => {
 
       fetchData();
     }
-  }, [query]);
+  }, [query, filters]);
 
   return {
     data,
