@@ -1,26 +1,44 @@
-import React from 'react'
-import { Fragment } from 'react'
-import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import React, { useEffect, useRef, useState } from "react";
+import { Fragment } from "react";
+import { Disclosure, Menu, Transition } from "@headlessui/react";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 export const NavBar = () => {
+  const navigate = useNavigate();
+  const [navigationItems, setNavigationItems] = useState([
+    { name: "Home", href: "/", current: true },
+    { name: "Search", href: "/search", current: false },
+    { name: "Recipe List", href: "/dashboard", current: false },
+  ]);
 
-    const location = useLocation();
-    const navigate = useNavigate();
+  const location = useLocation();
+  const navigationItemsRef = useRef(navigationItems);
 
-    const navigation = [
-        { name: 'Home', href: '/', current: location.pathname === '/', to: '/' },
-        { name: 'Recipe Search', href: '/search', current: location.pathname === '/search', to: '/search' },
-    ]
+  function classNames(...classes) {
+    return classes.filter(Boolean).join(" ");
+  }
 
-    function classNames(...classes) {
-        return classes.filter(Boolean).join(' ')
+  useEffect(() => {
+    const currentPath = location.pathname;
+
+    if (navigationItemsRef.current.some((item) => item.href === currentPath)) {
+      const updatedItems = navigationItemsRef.current.map((item) => ({
+        ...item,
+        current: item.href === currentPath,
+      }));
+
+      setNavigationItems(updatedItems);
     }
+  }, [location.pathname]);
 
-    return (
-        <Disclosure as="nav" className="bg-orange-200">
-        {({ open }) => (
+  useEffect(() => {
+    navigationItemsRef.current = navigationItems;
+  }, [navigationItems]);
+
+  return (
+    <Disclosure as="nav" className="bg-orange-200">
+      {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
             <div className="relative flex h-16 items-center justify-between">
@@ -46,19 +64,20 @@ export const NavBar = () => {
                 </div>
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
-                    {navigation.map((item) => (
-                      <a
+                    {navigationItems.map((item) => (
+                      <Link
                         key={item.name}
-                        href={item.href}
+                        to={item.href}
                         className={classNames(
-                          item.current ? 'bg-yellow-300 text-black' : 'text-black hover:bg-red-400 hover:text-black',
-                          'rounded-md px-3 py-2 text-sm font-medium'
+                          item.current
+                            ? "bg-yellow-300 text-black"
+                            : "text-black hover:bg-red-400 hover:text-black",
+                          "rounded-md px-3 py-2 text-sm font-medium"
                         )}
-                        aria-current={item.current ? 'page' : undefined}
+                        aria-current={item.current ? "page" : undefined}
                       >
                         {item.name}
-                        
-                      </a>
+                      </Link>
                     ))}
                   </div>
                 </div>
@@ -91,7 +110,10 @@ export const NavBar = () => {
                         {({ active }) => (
                           <Link
                             href="#"
-                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-black')}
+                            className={classNames(
+                              active ? "bg-gray-100" : "",
+                              "block px-4 py-2 text-sm text-black"
+                            )}
                           >
                             Your Profile
                           </Link>
@@ -101,7 +123,10 @@ export const NavBar = () => {
                         {({ active }) => (
                           <Link
                             href="#"
-                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-black')}
+                            className={classNames(
+                              active ? "bg-gray-100" : "",
+                              "block px-4 py-2 text-sm text-black"
+                            )}
                           >
                             Sign out
                           </Link>
@@ -116,16 +141,20 @@ export const NavBar = () => {
 
           <Disclosure.Panel className="sm:hidden">
             <div className="space-y-1 px-2 pb-3 pt-2">
-              {navigation.map((item) => (
+              {navigationItems.map((item) => (
                 <Disclosure.Button
                   key={item.name}
-                  as="a"
-                  href={item.href}
+                  as="button"
+                  onClick={() => {
+                    navigate(item.href);
+                  }}
                   className={classNames(
-                    item.current ? 'bg-yellow-300 text-black' : 'text-black hover:bg-red-400 hover:text-black',
-                    'block rounded-md px-3 py-2 text-base font-medium'
+                    item.current
+                      ? "bg-yellow-300 text-black"
+                      : "text-black hover:bg-red-400 hover:text-black",
+                    "rounded-md px-3 py-2 text-sm font-medium"
                   )}
-                  aria-current={item.current ? 'page' : undefined}
+                  aria-current={item.current ? "page" : undefined}
                 >
                   {item.name}
                 </Disclosure.Button>
@@ -135,5 +164,5 @@ export const NavBar = () => {
         </>
       )}
     </Disclosure>
-  )
-}
+  );
+};

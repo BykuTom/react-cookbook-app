@@ -1,5 +1,4 @@
-import { set } from "date-fns";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import Select from "react-select";
 const colourOptions = [
@@ -19,6 +18,7 @@ const colourOptions = [
 
 export const MultiSelect = () => {
   const [value, setValue] = useState(null);
+
   return (
     <Select
       defaultValue={null}
@@ -28,7 +28,7 @@ export const MultiSelect = () => {
       className="basic-multi-select"
       classNamePrefix="select"
       onChange={(event) => {
-        console.log(event);
+        setValue(event);
       }}
     />
   );
