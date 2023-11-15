@@ -18,18 +18,18 @@ export const useRecipeSearch = (query, filters) => {
         addRecipeInformation: "true",
         number: "100",
         limitLicense: "false",
-        // ...(filters.cuisine && { cuisine: filters.cuisine }),
-        // ...(filters.diet && { diet: filters.diet }),
-        // ...(filters.intolerances && { intolerances: filters.intolerances }),
-        // ...(filters.mealType && { type: filters.mealType }),
-        // ...(filters.includeIngredients && {
-        //   includeIngredients: filters.includeIngredients,
-        // }),
-        // ...(filters.excludeIngredients && {
-        //   excludeIngredients: filters.excludeIngredients,
-        // }),
-        // ...(filters.sort && { sort: filters.sort }),
-        // ...(filters.sortDirection && { sortDirection: filters.sortDirection }),
+        ...(filters.cuisine && { cuisine: filters.cuisine }),
+        ...(filters.diet && { diet: filters.diet }),
+        ...(filters.intolerances && { intolerances: filters.intolerances }),
+        ...(filters.mealType && { type: filters.mealType }),
+        ...(filters.includeIngredients && {
+          includeIngredients: filters.includeIngredients,
+        }),
+        ...(filters.excludeIngredients && {
+          excludeIngredients: filters.excludeIngredients,
+        }),
+        ...(filters.sort && { sort: filters.sort }),
+        ...(filters.sortDirection && { sortDirection: filters.sortDirection }),
       };
 
       const fetchData = async () => {
