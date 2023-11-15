@@ -1,35 +1,37 @@
-import React, { useEffect, useState } from "react";
-
 import Select from "react-select";
-const colourOptions = [
-  { value: "Dairy", label: "Dairy" },
-  { value: "Egg", label: "Egg" },
-  { value: "Gluten", label: "Gluten" },
-  { value: "Grain", label: "Grain" },
-  { value: "Peanut", label: "Peanut" },
-  { value: "Seafood", label: "Seafood" },
-  { value: "Sesame", label: "Sesame" },
-  { value: "Shellfish", label: "Shellfish" },
-  { value: "Soy", label: "Soy" },
-  { value: "Sulfite", label: "Sulfite" },
-  { value: "Tree Nut", label: "Tree Nut" },
-  { value: "Wheat", label: "Wheat" },
+
+const intolerancesOptions = [
+  { value: "dairy", label: "Dairy" },
+  { value: "egg", label: "Egg" },
+  { value: "gluten", label: "Gluten" },
+  { value: "grain", label: "Grain" },
+  { value: "peanut", label: "Peanut" },
+  { value: "seafood", label: "Seafood" },
+  { value: "sesame", label: "Sesame" },
+  { value: "shellfish", label: "Shellfish" },
+  { value: "soy", label: "Soy" },
+  { value: "sulfite", label: "Sulfite" },
+  { value: "tree Nut", label: "Tree Nut" },
+  { value: "wheat", label: "Wheat" },
 ];
 
-export const MultiSelect = () => {
-  const [value, setValue] = useState(null);
+export const MultiSelect = ({selectedValues, setSelectedValues}) => {
+  const handleChange = (intolerancesOption) => {
+    //Extracting just value from intolerancesOption
+    const intoleranceValue = intolerancesOption.map((option) => option.value);
+    setSelectedValues(intoleranceValue);
+  }
 
   return (
     <Select
-      defaultValue={null}
+      defaultValue={selectedValues}
       isMulti
-      name="colors"
-      options={colourOptions}
+      name="intolerances"
+      options={intolerancesOptions}
       className="basic-multi-select"
       classNamePrefix="select"
-      onChange={(event) => {
-        setValue(event);
-      }}
+      placeholder="Intolerances"
+      onChange={handleChange}
     />
   );
 };
