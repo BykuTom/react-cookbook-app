@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { mockSearchResponse } from "../assets/data/mockSearchResponse";
 
 const SPOONACULAR_URL =
   "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/complexSearch";
@@ -35,20 +36,23 @@ export const useRecipeSearch = (query, filters) => {
         setIsLoading(true);
 
         try {
-          const response = await axios.get(SPOONACULAR_URL, {
+          /*  const response = await axios.get(SPOONACULAR_URL, {
             headers: {
               "X-RapidAPI-Key": process.env.REACT_APP_X_RapidAPI_Key,
               "X-RapidAPI-Host": process.env.REACT_APP_X_RAPID_API_HOST,
             },
             params: params,
           });
+ */
+          const response = mockSearchResponse;
+          response.status = 200;
 
           if (response.status !== 200) {
             setError(true);
             setData();
           } else {
             setError(false);
-            setData(response.data);
+            setData(response.results);
           }
         } catch (error) {
           setError(true);

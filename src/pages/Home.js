@@ -14,11 +14,11 @@ export const Home = () => {
     sortDirection: "asc",
   };
 
-  /*   const { data, isLoading, error } = useRecipeSearch(query, filters);
+  const { data, isLoading, error } = useRecipeSearch(query, filters);
 
   console.log(data);
   error && console.log(error);
- */
+
   return (
     <div className="min-w-screen min-h-screen ">
       <HeroBanner />
