@@ -4,11 +4,8 @@ import { NoMatch } from "./pages/NoMatch";
 import { Recipe } from "./pages/Recipe";
 import { Search } from "./pages/Search";
 import { RecipeDashboard } from "./pages/RecipeDashboard";
-<<<<<<< HEAD
 import { MyRecipeList } from "./pages/MyRecipeList";
-=======
 import { MyCookbooks } from "./pages/MyCookbooks";
->>>>>>> 7543869291e2cc71892dc3a02ad9cce7fc7535e6
 
 export const AppRoutes = () => {
   return (
