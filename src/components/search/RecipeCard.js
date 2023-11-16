@@ -1,15 +1,15 @@
 import filletImage from "../../assets/images/Reverse-Sear-Filet-Mignon.webp";
 
-export const RecipeCard = ({ title, description }) => {
-  let string = description;
+export const RecipeCard = ({ title, summary, imageURL }) => {
+  let string = summary;
 
   if (string.length > 167) {
-    string = description.slice(0, 168) + "(...)";
+    string = summary.slice(0, 168) + "(...)";
   }
 
   return (
     <div className="card card-image-cover bg-gray-50 drop-shadow-lg">
-      <img src={filletImage} alt="" />
+      <img src={imageURL} alt="" />
       <div className="card-body py-4">
         <h2 className="card-header text-black">{title}</h2>
         <p className="text-black h-[7.5rem]">{string}</p>

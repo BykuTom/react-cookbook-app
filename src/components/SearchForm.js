@@ -4,20 +4,17 @@ import { MultiSelect } from "./search/MultiSelect";
 
 export const SearchForm = ({ onSuccess, initialSearchTerm }) => {
   // initialFilters to be added
+  const dummyFilter = {
+    cusisine: "American",
+    mealType: "breakfast",
+  };
   const formik = useFormik({
     initialValues: {
       query: initialSearchTerm || "",
-      filters: "",
     },
 
-    onSubmit: (query) => {
-      console.log(initialSearchTerm);
-      console.log(query);
-
-      /* if (onSuccess) {
-        onSuccess(query);
-        console.log("success")
-      } */
+    onSubmit: (query, filters = dummyFilter) => {
+      onSuccess([query, filters]);
     },
   });
 
@@ -48,14 +45,12 @@ export const SearchForm = ({ onSuccess, initialSearchTerm }) => {
           </svg>
         </div>
         <input
-          type="search"
-          id="default-search"
-          name="query"
           className="block mb-2 w-full p-4 ps-10 text-sm text-gray-900 border border-gray-600 rounded-lg bg-white focus:border-black dark:text-black"
-          placeholder="Search for recipes"
+          placeholder="Discover Delicious Recipes!"
           required
-          onChange={formik.handleChange}
+          name="query"
           value={formik.values.query}
+          onChange={formik.handleChange}
           onBlur={formik.handleBlur}
         />
         <button
@@ -65,12 +60,15 @@ export const SearchForm = ({ onSuccess, initialSearchTerm }) => {
           Search
         </button>
       </div>
-      <MultiSelect
+    </form>
+  );
+};
+
+{
+  /* <MultiSelect
         selectedValues={formik.values.intolerances}
         setSelectedValues={(intolerances) =>
           formik.setFieldValue("intolerances", intolerances)
         }
-      />
-    </form>
-  );
-};
+      /> */
+}

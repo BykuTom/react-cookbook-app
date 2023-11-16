@@ -2,9 +2,8 @@ import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useRecipeSearch } from "../hooks/useRecipeSearch";
 import { SearchForm } from "../components/SearchForm";
-import { Filters } from "../components/Filters";
-import { RecipeCard } from "../components/search/RecipeCard";
 import * as utils from "../utils/utilities";
+import { SearchResults } from "../components/search/SearchResults";
 
 export const Search = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -15,29 +14,28 @@ export const Search = () => {
 
   const { data, isLoading, error } = useRecipeSearch([searchTerm, filterTerm]);
 
-  const onSuccess = ({ query, filters }) => {
-    setSearchParams({ q: query });
-    setSearchParams({ f: filters });
+  const onSuccess = ([{ query }, filters]) => {
+    console.log(query);
+    console.log(filters); // filters to be fixed
+    setSearchParams({ q: query }, { f: filters });
+
     setSearchTerm([query]);
-    setFilterTerm([filters]);
+    /*  setFilterTerm([filters]); */
   };
 
   useEffect(() => {
     /* console.log(searchParams.get("q"));
     console.log(searchParams.get("f"));
-    console.log(data); */
+     */
+    console.log(data);
   }, [data]);
 
   return (
     <div>
-      <SearchForm onSuccess={onSuccess} />
-      <Filters />
-      <RecipeCard
-        title="Tasty Burger 100% Beef"
-        description={
-          "Amazingly delicous burger, zinger stacker from KFC or chicken MCSpicy from MCdonald, burger king has trash burgers though. "
-        }
-      />
+      <SearchForm onSuccess={onSuccess} initialSearchTerm={searchTerm} />
+      {data && Array.isArray(data) && data.length > 0 && (
+        <SearchResults results={data} />
+      )}
     </div>
   );
 };
