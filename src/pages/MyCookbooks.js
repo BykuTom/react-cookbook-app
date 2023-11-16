@@ -46,7 +46,7 @@ export const MyCookbooks = () => {
         </button>
       </div>
       <Transition appear show={isOpen} as={Fragment}>
-        <Dialog as="div" className="relative z-10" onClose={closeModal}>
+        <Dialog as="div" className="relative z-10" onClose={() => {}}>
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"
@@ -79,9 +79,7 @@ export const MyCookbooks = () => {
                   </Dialog.Title>
                   <form
                     className="w-full flex flex-col gap-1 justify-center items-center"
-                    onSubmit={(event) => {
-                      event.preventDefault();
-                    }}
+                    onSubmit={formik.handleSubmit}
                   >
                     <input
                       placeholder="New Cookbook's Name"
@@ -91,7 +89,7 @@ export const MyCookbooks = () => {
                       onChange={formik.handleChange}
                       onBlur={formik.handleBlur}
                     ></input>
-
+                    onSubmit
                     <textarea
                       className="bg-white p-2 mt-2 text-black placeholder:text-stone-400 border-solid border-[1px] border-stone-600 rounded-md w-full min-h-[7rem] resize-none"
                       placeholder="New Cookbook's Description"
@@ -109,7 +107,7 @@ export const MyCookbooks = () => {
                         Create new Cookbook !
                       </button>
                       <button
-                        type="submit"
+                        type="button"
                         className="btn btn-error mt-4"
                         onClick={closeModal}
                       >
