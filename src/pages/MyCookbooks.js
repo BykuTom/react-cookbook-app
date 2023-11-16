@@ -4,21 +4,21 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 
 export const MyCookbooks = () => {
+  const createCookBook = ({ title, description }) => {
+    const cookBooks = JSON.parse(localStorage.getItem("myCookBooks")) || [];
 
-  const createCookBook = ({title, description}) => {
-    const cookBooks = localStorage.getItem('myCookBooks');
     const newCookBook = {
       id: crypto.randomUUID(),
       title: title,
       description: description,
       items: [],
-    }
-    if(cookBooks) {
-      localStorage.setItem('myCookBooks', JSON.stringify([...cookBooks, newCookBook]))
-    } else {
-      localStorage.setItem('myCookBooks', JSON.stringify([newCookBook]))
-    }
-  }
+    };
+
+    localStorage.setItem(
+      "myCookBooks",
+      JSON.stringify([...cookBooks, newCookBook])
+    );
+  };
   let [isOpen, setIsOpen] = useState(false);
 
   const closeModal = () => {
