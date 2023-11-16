@@ -10,6 +10,7 @@ export const NavBar = () => {
     { name: "Home", href: "/", current: true },
     { name: "Search", href: "/search", current: false },
     { name: "Recipe List", href: "/dashboard", current: false },
+    { name: "My Cookbooks", href: "/mycookbooks", current: false },
   ]);
 
   const location = useLocation();

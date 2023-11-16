@@ -35,8 +35,8 @@ export const MyCookbooks = () => {
   });
 
   return (
-    <div>
-      <div className="fixed inset-0 flex items-center justify-center">
+    <div className="w-full min-h-[calc(100vh-9rem)]">
+      <div className="h-full w-full flex items-center justify-center">
         <button
           type="button"
           onClick={openModal}
