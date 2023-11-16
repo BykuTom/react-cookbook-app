@@ -1,30 +1,32 @@
-import React from 'react';
-import { useFormik } from 'formik';
-import { MultiSelect } from './search/MultiSelect';
+import React from "react";
+import { useFormik } from "formik";
+import { MultiSelect } from "./search/MultiSelect";
 
 export const SearchForm = ({ onSuccess, initialSearchTerm }) => {
-  
-
+  // initialFilters to be added
   const formik = useFormik({
     initialValues: {
-      query: initialSearchTerm || '',
-      intolerances: "",
+      query: initialSearchTerm || "",
+      filters: "",
     },
-    
+
     onSubmit: (query) => {
+      console.log(initialSearchTerm);
+      console.log(query);
 
-      console.log('Form query:', query);
-
-      if (onSuccess) {
+      /* if (onSuccess) {
         onSuccess(query);
         console.log("success")
-      }
+      } */
     },
   });
 
   return (
-    <form onSubmit={formik.handleSubmit} className='mt-2 mb-2 p-1'>
-      <label htmlFor="default-search" className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">
+    <form onSubmit={formik.handleSubmit} className="mt-2 mb-2 p-1">
+      <label
+        htmlFor="default-search"
+        className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
+      >
         Search
       </label>
       <div className="relative">
@@ -59,15 +61,16 @@ export const SearchForm = ({ onSuccess, initialSearchTerm }) => {
         <button
           type="submit"
           className="text-black absolute end-2.5 bottom-2.5 bg-red-300 hover:bg-red-400 rounded-lg text-sm px-4 py-2"
-          >
+        >
           Search
         </button>
       </div>
       <MultiSelect
         selectedValues={formik.values.intolerances}
-        setSelectedValues={(intolerances) => formik.setFieldValue('intolerances', intolerances)}
+        setSelectedValues={(intolerances) =>
+          formik.setFieldValue("intolerances", intolerances)
+        }
       />
-
     </form>
   );
 };

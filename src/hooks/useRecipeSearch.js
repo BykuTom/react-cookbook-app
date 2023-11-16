@@ -5,34 +5,38 @@ import { mockSearchResponse } from "../assets/data/mockSearchResponse";
 const SPOONACULAR_URL =
   "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/complexSearch";
 
-export const useRecipeSearch = (query, filters) => {
+export const useRecipeSearch = ([query, filters]) => {
   const [data, setData] = useState();
   const [error, setError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (query) {
-      const params = {
-        query: query,
-        instructionsRequired: "true",
-        addRecipeInformation: "true",
-        number: "100",
-        limitLicense: "false",
-        ...(filters.cuisine && { cuisine: filters.cuisine }),
-        ...(filters.diet && { diet: filters.diet }),
-        ...(filters.intolerances && { intolerances: filters.intolerances }),
-        ...(filters.mealType && { type: filters.mealType }),
-        ...(filters.includeIngredients && {
-          includeIngredients: filters.includeIngredients,
-        }),
-        ...(filters.excludeIngredients && {
-          excludeIngredients: filters.excludeIngredients,
-        }),
-        ...(filters.sort && { sort: filters.sort }),
-        ...(filters.sortDirection && { sortDirection: filters.sortDirection }),
-      };
-
       const fetchData = async () => {
+        const params = {
+          query: query,
+          instructionsRequired: "true",
+          addRecipeInformation: "true",
+          number: "100",
+          limitLicense: "false",
+          ...(filters && {
+            ...(filters.cuisine && { cuisine: filters.cuisine }),
+            ...(filters.diet && { diet: filters.diet }),
+            ...(filters.intolerances && { intolerances: filters.intolerances }),
+            ...(filters.mealType && { type: filters.mealType }),
+            ...(filters.includeIngredients && {
+              includeIngredients: filters.includeIngredients,
+            }),
+            ...(filters.excludeIngredients && {
+              excludeIngredients: filters.excludeIngredients,
+            }),
+            ...(filters.sort && { sort: filters.sort }),
+            ...(filters.sortDirection && {
+              sortDirection: filters.sortDirection,
+            }),
+          }),
+        };
+        console.log(params);
         setIsLoading(true);
 
         try {

@@ -1,25 +1,32 @@
+import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
+import { useRecipeSearch } from "../hooks/useRecipeSearch";
 import { SearchForm } from "../components/SearchForm";
 import { Filters } from "../components/Filters";
-import { useSearchParams } from "react-router-dom";
-import { useState } from "react";
-import { useRecipeSearch } from "../hooks/useRecipeSearch";
-
-import { MultiSelect } from "../components/search/MultiSelect";
-
 import { RecipeCard } from "../components/search/RecipeCard";
+import * as utils from "../utils/utilities";
 
 export const Search = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [searchTerm, setSearchTerm] = useState(searchParams.get("q:query"));
+  const [searchTerm, setSearchTerm] = useState(searchParams.get("q"));
+  const [filterTerm, setFilterTerm] = useState(
+    utils.decodeURIObject(searchParams.get("f"))
+  );
 
-  const { data, isLoading, error } = useRecipeSearch(searchTerm);
+  const { data, isLoading, error } = useRecipeSearch([searchTerm, filterTerm]);
 
-  const onSuccess = (query) => {
-    console.log(data);
-    error && console.log(error);
+  const onSuccess = ({ query, filters }) => {
     setSearchParams({ q: query });
-    setSearchTerm(query);
+    setSearchParams({ f: filters });
+    setSearchTerm([query]);
+    setFilterTerm([filters]);
   };
+
+  useEffect(() => {
+    /* console.log(searchParams.get("q"));
+    console.log(searchParams.get("f"));
+    console.log(data); */
+  }, [data]);
 
   return (
     <div>
