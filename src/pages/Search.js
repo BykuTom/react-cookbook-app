@@ -4,6 +4,7 @@ import { useRecipeSearch } from "../hooks/useRecipeSearch";
 import { SearchForm } from "../components/SearchForm";
 import * as utils from "../utils/utilities";
 import { SearchResults } from "../components/search/SearchResults";
+import { Dialog } from "@headlessui/react";
 
 export const Search = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -12,7 +13,8 @@ export const Search = () => {
     utils.decodeURIObject(searchParams.get("f"))
   );
 
-  const { data, isLoading, error } = useRecipeSearch([searchTerm, filterTerm]);
+  const { data, error } = useRecipeSearch([searchTerm, filterTerm]);
+  const isLoading = true;
 
   const onSuccess = ([{ query }, filters]) => {
     console.log(query);
@@ -33,6 +35,22 @@ export const Search = () => {
   return (
     <div>
       <SearchForm onSuccess={onSuccess} initialSearchTerm={searchTerm} />
+      {/*   {isLoading && (
+        <Dialog open={true} onClose={() => {}}>
+          <Dialog.Panel>
+            <div class="spinner-dot-circle">
+              <div class="spinner-dot"></div>
+              <div class="spinner-dot"></div>
+              <div class="spinner-dot"></div>
+              <div class="spinner-dot"></div>
+              <div class="spinner-dot"></div>
+              <div class="spinner-dot"></div>
+              <div class="spinner-dot"></div>
+              <div class="spinner-dot"></div>
+            </div>
+          </Dialog.Panel>
+        </Dialog>
+      )} */}
       {data && Array.isArray(data) && data.length > 0 && (
         <SearchResults results={data} />
       )}

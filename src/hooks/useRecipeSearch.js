@@ -36,29 +36,28 @@ export const useRecipeSearch = ([query, filters]) => {
             }),
           }),
         };
-        console.log(params);
         setIsLoading(true);
 
         try {
-          /*  const response = await axios.get(SPOONACULAR_URL, {
+          /* const response = await axios.get(SPOONACULAR_URL, {
             headers: {
               "X-RapidAPI-Key": process.env.REACT_APP_X_RapidAPI_Key,
               "X-RapidAPI-Host": process.env.REACT_APP_X_RAPID_API_HOST,
             },
             params: params,
-          });
- */
-          const response = mockSearchResponse;
-          response.status = 200;
+          }); */
+
+          const response = { status: 200, data: mockSearchResponse };
 
           if (response.status !== 200) {
             setError(true);
             setData();
           } else {
             setError(false);
-            setData(response.results);
+            setData(response.data.results);
           }
         } catch (error) {
+          console.log(error);
           setError(true);
           setData();
         }
