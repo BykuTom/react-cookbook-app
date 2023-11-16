@@ -47,7 +47,7 @@ export const useRecipeSearch = ([query, filters]) => {
           //   params: params,
           // });
 
-          const response = { status: 200, data: mockSearchResponse };
+           const response = { status: 200, data: mockSearchResponse };
 
           if (response.status !== 200) {
             setError(true);
@@ -57,7 +57,7 @@ export const useRecipeSearch = ([query, filters]) => {
             setData(response.data.results);
           }
         } catch (error) {
-          console.log(error);
+          console.log(error.message);
           setError(true);
           setData();
         }
