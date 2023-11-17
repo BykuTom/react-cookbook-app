@@ -2,7 +2,6 @@ import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
 import { useApp } from "../../context/AppProvider";
 import { RadioGroup } from "@headlessui/react";
-import { getFromLocalStorage } from "../../utils/utilities";
 import { CreateCookBookModal } from "../myCookbooks/CreateCookbookModal";
 
 export const AddToCookbookModal = ({ isOpen, closeModal, recipe }) => {
@@ -15,20 +14,6 @@ export const AddToCookbookModal = ({ isOpen, closeModal, recipe }) => {
   };
   const closeCreateModal = () => {
     setIsCreateModalOpen(false);
-  };
-
-  const addRecipeToWishlist = (cookbookID, recipe) => {
-    const newCookBooks = state.myCookBooks.map((cookbook) => {
-      if (cookbook.id === cookbookID) {
-        return {
-          ...cookbook,
-          items: [recipe, ...cookbook.items],
-        };
-      }
-      return cookbook;
-    });
-
-    localStorage.setItem("myCookBooks", JSON.stringify(newCookBooks));
   };
 
   return (

@@ -8,6 +8,14 @@ export const RecipeCard = ({ recipe, variant, cookbookID }) => {
   const { dispatch } = useApp();
   const [isOpen, setIsOpen] = useState(false);
 
+  const handleRecipeNavigate = () => {
+    navigate(`/recipe/${recipe.id}`, {
+      state: {
+        recipe: recipe,
+      },
+    });
+  };
+
   const closeModal = () => {
     setIsOpen(false);
   };
@@ -36,9 +44,7 @@ export const RecipeCard = ({ recipe, variant, cookbookID }) => {
         <div className="card-footer">
           <button
             className="btn-warning btn mx-auto font-bold text-lg p-1"
-            onClick={() => {
-              console.log(recipe.id);
-            }}
+            onClick={handleRecipeNavigate}
           >
             Start Cooking!
           </button>

@@ -25,12 +25,12 @@ export const Search = () => {
     /*  setFilterTerm([filters]); */
   };
 
-  useEffect(() => {
-    /* console.log(searchParams.get("q"));
+  // useEffect(() => {
+  /* console.log(searchParams.get("q"));
     console.log(searchParams.get("f"));
      */
-    console.log(data);
-  }, [data]);
+  //console.log(data);
+  // }, [data]);
 
   return (
     <div>
