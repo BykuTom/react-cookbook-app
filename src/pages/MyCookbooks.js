@@ -1,25 +1,15 @@
-import { Dialog, Transition } from "@headlessui/react";
-import { Fragment, useState } from "react";
+import { useState, useEffect } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { CreateCookBookModal } from "../components/myCookbooks/CreateCookbookModal";
+import { useApp } from "../context/AppProvider";
+import { RadioGroup } from "@headlessui/react";
+import { RecipeCard } from "../components/search/RecipeCard";
 
 export const MyCookbooks = () => {
-  const createCookBook = ({ title, description }) => {
-    const cookBooks = JSON.parse(localStorage.getItem("myCookBooks")) || [];
-
-    const newCookBook = {
-      id: crypto.randomUUID(),
-      title: title,
-      description: description,
-      items: [],
-    };
-
-    localStorage.setItem(
-      "myCookBooks",
-      JSON.stringify([...cookBooks, newCookBook])
-    );
-  };
-  let [isOpen, setIsOpen] = useState(false);
+  const { state, dispatch } = useApp();
+  const [current, setCurrent] = useState("None");
+  const [isOpen, setIsOpen] = useState(false);
 
   const closeModal = () => {
     setIsOpen(false);
@@ -34,8 +24,15 @@ export const MyCookbooks = () => {
       name: "",
       description: "",
     },
-    onSubmit: (values) => {
-      createCookBook(values);
+    onSubmit: ({ name, description }) => {
+      const newCookBook = {
+        id: crypto.randomUUID(),
+        name: name,
+        description: description,
+        items: [],
+      };
+
+      dispatch({ type: "CREATE_NEW_COOKBOOK", payload: newCookBook });
     },
     validationSchema: Yup.object({
       name: Yup.string()
@@ -49,93 +46,64 @@ export const MyCookbooks = () => {
     }),
   });
 
+  useEffect(() => {
+    console.log(current);
+  }, [current]);
+
   return (
-    <div className="w-full min-h-[calc(100vh-9rem)]">
-      <div className="h-full w-full flex items-center justify-center">
+    <div className="w-full min-h-[calc(100vh-7rem)] p-2 flex bg-orange-50">
+      <div className="p-2 mr-2 rounded-lg flex-1 bg-orange-100 transition-all max-w-[20rem] duration-300 flex flex-col justify-center align-top">
         <button
           type="button"
           onClick={openModal}
-          className="rounded-md bg-black/20 px-4 py-2 text-sm font-medium text-white hover:bg-black/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75"
+          className="btn btn-error w-full drop-shadow-md"
         >
-          Open dialog
+          Create a new Cookbook
         </button>
-      </div>
-      <Transition appear show={isOpen} as={Fragment}>
-        <Dialog as="div" className="relative z-10" onClose={() => {}}>
-          <Transition.Child
-            as={Fragment}
-            enter="ease-out duration-300"
-            enterFrom="opacity-0"
-            enterTo="opacity-100"
-            leave="ease-in duration-200"
-            leaveFrom="opacity-100"
-            leaveTo="opacity-0"
-          >
-            <div className="fixed inset-0 bg-black/25" />
-          </Transition.Child>
-
-          <div className="fixed inset-0 overflow-y-auto">
-            <div className="flex min-h-full items-center justify-center p-4 text-center">
-              <Transition.Child
-                as={Fragment}
-                enter="ease-out duration-300"
-                enterFrom="opacity-0 scale-95"
-                enterTo="opacity-100 scale-100"
-                leave="ease-in duration-200"
-                leaveFrom="opacity-100 scale-100"
-                leaveTo="opacity-0 scale-95"
-              >
-                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
-                  <Dialog.Title
-                    as="h3"
-                    className="text-lg font-medium leading-6 text-gray-900"
-                  >
-                    Create a new Cookbook
-                  </Dialog.Title>
-                  <form
-                    className="w-full flex flex-col gap-1 justify-center items-center"
-                    onSubmit={formik.handleSubmit}
-                  >
-                    <input
-                      placeholder="New Cookbook's Name"
-                      className="w-full rounded-md border-solid placeholder:text-stone-400 border-stone-600 border-[1px] mt-4 bg-white text-black p-2"
-                      name="name"
-                      value={formik.values.name}
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBlur}
-                    ></input>
-                    onSubmit
-                    <textarea
-                      className="bg-white p-2 mt-2 text-black placeholder:text-stone-400 border-solid border-[1px] border-stone-600 rounded-md w-full min-h-[7rem] resize-none"
-                      placeholder="New Cookbook's Description"
-                      name="description"
-                      value={formik.values.description}
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBlur}
-                    ></textarea>
-                    <div className="flex flex-row gap-4 w-full justify-evenly">
-                      <button
-                        type="submit"
-                        className="btn btn-warning mt-4"
-                        onClick={closeModal}
-                      >
-                        Create new Cookbook !
-                      </button>
-                      <button
-                        type="button"
-                        className="btn btn-error mt-4"
-                        onClick={closeModal}
-                      >
-                        Cancel
-                      </button>
+        <RadioGroup
+          className="mt-2 w-full h-full bg-orange-200 rounded-lg p-2 overflow-scroll"
+          value={current}
+          onChange={setCurrent}
+        >
+          <RadioGroup.Label className={"sr-only"}>
+            Choose a list to display
+          </RadioGroup.Label>
+          {state.cookbooks &&
+            state.cookbooks.length > 0 &&
+            state.cookbooks.map((cookbook) => {
+              return (
+                <RadioGroup.Option value={cookbook.id} className="mb-2">
+                  {({ checked }) => (
+                    <div
+                      className={
+                        checked
+                          ? "text-md text-white btn btn-warning w-full"
+                          : "text-md text-black btn btn-outline-warning w-full"
+                      }
+                    >
+                      {cookbook.name}
                     </div>
-                  </form>
-                </Dialog.Panel>
-              </Transition.Child>
-            </div>
-          </div>
-        </Dialog>
-      </Transition>
+                  )}
+                </RadioGroup.Option>
+              );
+            })}
+        </RadioGroup>
+      </div>
+      <CreateCookBookModal
+        isOpen={isOpen}
+        closeModal={closeModal}
+        formik={formik}
+      />
+      <div className="flex-2 p-2 rounded-lg min-w-[40rem] bg-orange-100 transition-all duration-300 flex flex-row flex-wrap gap-4 justify-evenly ">
+        {state.cookbooks.map((cookbook) => {
+          if (cookbook.id === current) {
+            return cookbook.items.map((recipe) => {
+              return <RecipeCard recipe={recipe} key={recipe.id} />;
+            });
+          }
+          return null;
+        })}
+      </div>
     </div>
   );
 };

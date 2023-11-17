@@ -4,7 +4,6 @@ import { NoMatch } from "./pages/NoMatch";
 import { Recipe } from "./pages/Recipe";
 import { Search } from "./pages/Search";
 import { RecipeDashboard } from "./pages/RecipeDashboard";
-import { MyRecipeList } from "./pages/MyRecipeList";
 import { MyCookbooks } from "./pages/MyCookbooks";
 
 export const AppRoutes = () => {
@@ -15,7 +14,6 @@ export const AppRoutes = () => {
       <Route path="/dashboard" element={<RecipeDashboard />} />
       <Route path="/mycookbooks" element={<MyCookbooks />} />
       <Route path="/recipe/:recipeID" element={<Recipe />} />
-      <Route path="/myRecipeList" element={<MyRecipeList />} />
       <Route path="/*" element={<NoMatch />} />
     </Routes>
   );
