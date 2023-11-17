@@ -30,5 +30,30 @@ export const appReducer = (state, action) => {
       cookbooks: newCookbooks,
     };
   }
+
+  if (action.type === "REMOVE_RECIPE_FROM_COOKBOOK") {
+    const newCookbooks = state.cookbooks.map((cookbook) => {
+      if (cookbook.id === action.payload.cookbookID) {
+        const newRecipes = cookbook.items.filter((recipe) => {
+          return recipe.id !== action.payload.recipeID;
+        });
+
+        return {
+          ...cookbook,
+          items: newRecipes,
+        };
+      }
+
+      return cookbook;
+    });
+
+    localStorage.setItem("cookbooks", JSON.stringify(newCookbooks));
+
+    return {
+      ...state,
+      wishlists: newCookbooks,
+    };
+  }
+
   return state;
 };

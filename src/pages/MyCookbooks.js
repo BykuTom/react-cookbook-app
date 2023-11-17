@@ -94,11 +94,18 @@ export const MyCookbooks = () => {
         closeModal={closeModal}
         formik={formik}
       />
-      <div className="flex-2 p-2 rounded-lg min-w-[40rem] bg-orange-100 transition-all duration-300 flex flex-row flex-wrap gap-4 justify-evenly ">
+      <div className="flex-2 p-2 rounded-lg max-h-[calc(100vh-8rem)] overflow-auto w-full bg-orange-100 transition-all duration-300 flex flex-row flex-wrap gap-4 justify-evenly ">
         {state.cookbooks.map((cookbook) => {
           if (cookbook.id === current) {
             return cookbook.items.map((recipe) => {
-              return <RecipeCard recipe={recipe} key={recipe.id} />;
+              return (
+                <RecipeCard
+                  recipe={recipe}
+                  key={recipe.id}
+                  variant={true}
+                  cookbookID={current}
+                />
+              );
             });
           }
           return null;

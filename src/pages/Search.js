@@ -52,7 +52,7 @@ export const Search = () => {
         </Dialog>
       )} */}
       {data && Array.isArray(data) && data.length > 0 && (
-        <SearchResults results={data} />
+        <SearchResults results={data} variant={false} />
       )}
     </div>
   );

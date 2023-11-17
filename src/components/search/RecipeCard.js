@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { AddToCookbookModal } from "./AddToCookbookModal";
+import { useApp } from "../../context/AppProvider";
 
-export const RecipeCard = ({ recipe }) => {
+export const RecipeCard = ({ recipe, variant, cookbookID }) => {
+  const { dispatch } = useApp();
   const [isOpen, setIsOpen] = useState(false);
 
   const closeModal = () => {
@@ -33,13 +35,31 @@ export const RecipeCard = ({ recipe }) => {
           <button className="btn-warning btn mx-auto font-bold text-lg p-1">
             Start Cooking!
           </button>
-          <button
-            className="btn-danger btn mx-auto font-bold text-lg p-1"
-            type="button"
-            onClick={openModal} // Fixed onClick handler
-          >
-            Add to Recipe List
-          </button>
+          {variant ? (
+            <button
+              className="btn-danger btn mx-auto font-bold text-md p-1"
+              type="button"
+              onClick={() => {
+                dispatch({
+                  type: "REMOVE_RECIPE_FROM_COOKBOOK",
+                  payload: {
+                    cookbookID,
+                    recipeID: recipe.id,
+                  },
+                });
+              }}
+            >
+              Remove from Cookbook
+            </button>
+          ) : (
+            <button
+              className="btn-danger btn mx-auto font-bold text-lg p-1"
+              type="button"
+              onClick={openModal}
+            >
+              Add to Cookbook
+            </button>
+          )}
         </div>
       </div>
     </div>
