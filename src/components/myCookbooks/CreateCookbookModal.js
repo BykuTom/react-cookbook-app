@@ -1,7 +1,39 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment } from "react";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import { useApp } from "../../context/AppProvider";
 
-export const CreateCookBookModal = ({ isOpen, closeModal, formik }) => {
+export const CreateCookBookModal = ({ isOpen, closeModal }) => {
+  const { dispatch } = useApp();
+
+  const formik = useFormik({
+    initialValues: {
+      name: "",
+      description: "",
+    },
+    onSubmit: ({ name, description }) => {
+      const newCookBook = {
+        id: crypto.randomUUID(),
+        name: name,
+        description: description,
+        items: [],
+      };
+
+      dispatch({ type: "CREATE_NEW_COOKBOOK", payload: newCookBook });
+    },
+    validationSchema: Yup.object({
+      name: Yup.string()
+        .required("Cookbook name is required")
+        .min(4, "Cookbook's name needs to be four characters or longer")
+        .max(20, "Cookbooks title should be shorter than twenty characters"),
+      description: Yup.string().max(
+        150,
+        "Description cannot be longer than 150 characters"
+      ),
+    }),
+  });
+
   return (
     <Transition appear show={isOpen} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={() => {}}>

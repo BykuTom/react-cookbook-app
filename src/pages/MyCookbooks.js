@@ -1,13 +1,12 @@
 import { useState, useEffect } from "react";
-import { useFormik } from "formik";
-import * as Yup from "yup";
 import { CreateCookBookModal } from "../components/myCookbooks/CreateCookbookModal";
 import { useApp } from "../context/AppProvider";
 import { RadioGroup } from "@headlessui/react";
 import { RecipeCard } from "../components/search/RecipeCard";
+import { CookbookDisplay } from "../components/myCookbooks/CookbookDisplay";
 
 export const MyCookbooks = () => {
-  const { state, dispatch } = useApp();
+  const { state } = useApp();
   const [current, setCurrent] = useState("None");
   const [isOpen, setIsOpen] = useState(false);
 
@@ -18,33 +17,6 @@ export const MyCookbooks = () => {
   const openModal = () => {
     setIsOpen(true);
   };
-
-  const formik = useFormik({
-    initialValues: {
-      name: "",
-      description: "",
-    },
-    onSubmit: ({ name, description }) => {
-      const newCookBook = {
-        id: crypto.randomUUID(),
-        name: name,
-        description: description,
-        items: [],
-      };
-
-      dispatch({ type: "CREATE_NEW_COOKBOOK", payload: newCookBook });
-    },
-    validationSchema: Yup.object({
-      name: Yup.string()
-        .required("Cookbook name is required")
-        .min(4, "Cookbook's name needs to be four characters or longer")
-        .max(20, "Cookbooks title should be shorter than twenty characters"),
-      description: Yup.string().max(
-        150,
-        "Description cannot be longer than 150 characters"
-      ),
-    }),
-  });
 
   useEffect(() => {
     console.log(current);
@@ -89,12 +61,14 @@ export const MyCookbooks = () => {
             })}
         </RadioGroup>
       </div>
-      <CreateCookBookModal
-        isOpen={isOpen}
-        closeModal={closeModal}
-        formik={formik}
-      />
-      <div className="flex-2 p-2 rounded-lg max-h-[calc(100vh-8rem)] overflow-auto w-full bg-orange-100 transition-all duration-300 flex flex-row flex-wrap gap-4 justify-evenly ">
+      <CreateCookBookModal isOpen={isOpen} closeModal={closeModal} />
+      <CookbookDisplay current={current} setCurrent={setCurrent} />
+    </div>
+  );
+};
+
+/* 
+<div className="flex-2 p-2 rounded-lg max-h-[calc(100vh-8rem)] overflow-auto w-full bg-orange-100 transition-all duration-300 flex flex-row flex-wrap gap-4 justify-evenly ">
         {state.cookbooks.map((cookbook) => {
           if (cookbook.id === current) {
             return cookbook.items.map((recipe) => {
@@ -110,7 +84,4 @@ export const MyCookbooks = () => {
           }
           return null;
         })}
-      </div>
-    </div>
-  );
-};
+      </div> */

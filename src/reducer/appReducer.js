@@ -55,5 +55,21 @@ export const appReducer = (state, action) => {
     };
   }
 
+  if (action.type === "REMOVE_COOKBOOK") {
+    console.log(action);
+    const { cookbookID } = action.payload;
+
+    const newCookbooks = state.cookbooks.filter((cookbook) => {
+      return cookbook.id !== cookbookID;
+    });
+
+    localStorage.setItem("cookbooks", JSON.stringify(newCookbooks));
+
+    return {
+      ...state,
+      cookbooks: newCookbooks,
+    };
+  }
+
   return state;
 };
