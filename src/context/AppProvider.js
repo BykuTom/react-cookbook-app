@@ -6,7 +6,7 @@ export const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
   const initialState = {
-    myCookBooks: getFromLocalStorage("myCookBooks", []),
+    myCookBooks: getFromLocalStorage("myCookBooks", []), // Needs to filter cookbooks by userID
     cookbooks: getFromLocalStorage("cookbooks", []),
   };
 
