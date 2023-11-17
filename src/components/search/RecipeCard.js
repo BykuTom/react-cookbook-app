@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { AddToCookbookModal } from "./AddToCookbookModal";
 import { useApp } from "../../context/AppProvider";
+import { useNavigate } from "react-router-dom";
 
 export const RecipeCard = ({ recipe, variant, cookbookID }) => {
+  const navigate = useNavigate();
   const { dispatch } = useApp();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -32,7 +34,12 @@ export const RecipeCard = ({ recipe, variant, cookbookID }) => {
         <h2 className="card-header text-black">{recipe.title}</h2>
         <p className="text-black h-[7.5rem]">{string}</p>
         <div className="card-footer">
-          <button className="btn-warning btn mx-auto font-bold text-lg p-1">
+          <button
+            className="btn-warning btn mx-auto font-bold text-lg p-1"
+            onClick={() => {
+              console.log(recipe.id);
+            }}
+          >
             Start Cooking!
           </button>
           {variant ? (

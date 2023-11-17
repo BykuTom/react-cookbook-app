@@ -79,7 +79,6 @@ export const CreateCookBookModal = ({ isOpen, closeModal }) => {
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                   ></input>
-                  onSubmit
                   <textarea
                     className="bg-white p-2 mt-2 text-black placeholder:text-stone-400 border-solid border-[1px] border-stone-600 rounded-md w-full min-h-[7rem] resize-none"
                     placeholder="New Cookbook's Description"
