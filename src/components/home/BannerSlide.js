@@ -10,7 +10,7 @@ export const BannerSlide = ({ title, summary, image, rating }) => {
           <div className="mx-auto grid max-w-3xl grid-cols-1 gap-x-8 gap-y-8 sm:gap-y-12 lg:mx-0 lg:max-w-none lg:grid-cols-2">
             <div className="lg:row-start-1 lg:col-start-2 m-auto w-full">
               <img
-                src={image}
+                src={image || filletImage}
                 alt="Product screenshot"
                 className="w-full max-w-[48rem] rounded-xl shadow-xl ring-1 ring-gray-400/10 "
               />

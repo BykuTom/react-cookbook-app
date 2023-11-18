@@ -24,7 +24,6 @@ export const AddToCookbookModal = ({ isOpen, closeModal, recipe }) => {
           className="relative z-10"
           onClose={() => {
             setCurrent("None");
-            closeModal();
           }}
         >
           <Transition.Child
@@ -51,6 +50,10 @@ export const AddToCookbookModal = ({ isOpen, closeModal, recipe }) => {
                 leaveTo="opacity-0 scale-95"
               >
                 <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                  <CreateCookBookModal
+                    isOpen={isCreateModalOpen}
+                    closeModal={closeCreateModal}
+                  />
                   <Dialog.Title
                     as="h3"
                     className="text-lg font-medium leading-6 text-gray-900"
@@ -120,12 +123,6 @@ export const AddToCookbookModal = ({ isOpen, closeModal, recipe }) => {
                       Cancel
                     </button>
                   </div>
-                  {isCreateModalOpen && (
-                    <CreateCookBookModal
-                      isOpen={isCreateModalOpen}
-                      closeModal={closeCreateModal}
-                    />
-                  )}
                 </Dialog.Panel>
               </Transition.Child>
             </div>

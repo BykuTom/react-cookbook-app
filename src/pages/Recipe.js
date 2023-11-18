@@ -20,6 +20,7 @@ export const Recipe = () => {
         image={recipeFromState.image}
         rating={5}
       />
+      <div className="divider divider-horizontal m-6 opacity-40 "></div>
     </div>
   );
 };
