@@ -2,6 +2,7 @@ import { useState } from "react";
 import { AddToCookbookModal } from "./AddToCookbookModal";
 import { useApp } from "../../context/AppProvider";
 import { useNavigate } from "react-router-dom";
+import { parseToHTML } from "../../utils/utilities";
 
 export const RecipeCard = ({ recipe, variant, cookbookID }) => {
   const navigate = useNavigate();
@@ -40,7 +41,7 @@ export const RecipeCard = ({ recipe, variant, cookbookID }) => {
       <img src={recipe.image} alt="" />
       <div className="card-body py-4">
         <h2 className="card-header text-black">{recipe.title}</h2>
-        <p className="text-black h-[7.5rem]">{string}</p>
+        <p className="text-black h-[7.5rem]">{parseToHTML(string)}</p>
         <div className="card-footer">
           <button
             className="btn-warning btn mx-auto font-bold text-lg p-1"

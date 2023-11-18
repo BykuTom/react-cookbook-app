@@ -1,16 +1,25 @@
 import { useParams, useLocation } from "react-router-dom";
 import { useEffect } from "react";
+import { useRecipeById } from "../hooks/useRecipeByID";
+import { BannerSlide } from "../components/home/BannerSlide";
 
 export const Recipe = () => {
   const { recipeID } = useParams();
   const location = useLocation();
-  const recipe = location.state?.recipe;
+  const recipeFromState = location.state?.recipe;
 
-  useEffect(() => {
-    console.log("useEffect");
-    !recipe && console.log(recipeID);
-    console.log(recipe);
-  }, [recipeID, recipe]);
+  // const { recipe, isLoading, error } = useRecipeById(recipeID);
 
-  return <div className="text-black">{recipe?.title}</div>;
+  //{recipeFromState?.title}
+
+  return (
+    <div className="w-full min-h-[calc(100vh-7rem)] bg-orange-50 p-4 pt-10">
+      <BannerSlide
+        title={recipeFromState.title}
+        summary={recipeFromState.summary}
+        image={recipeFromState.image}
+        rating={5}
+      />
+    </div>
+  );
 };

@@ -1,3 +1,5 @@
+import parse from "html-react-parser";
+
 export const encodeURIObject = (object) => {
   if (object) {
     return encodeURIComponent(JSON.stringify(object));
@@ -22,4 +24,8 @@ export const getFromLocalStorage = (key, defaultValue) => {
     return defaultValue;
   }
   return JSON.parse(dataFromLS);
+};
+
+export const parseToHTML = (string) => {
+  return parse(string);
 };

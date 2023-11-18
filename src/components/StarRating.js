@@ -9,10 +9,10 @@ export const StarRating = ({ number }) => {
         <svg
           key={i}
           xmlns="http://www.w3.org/2000/svg"
-          fill="#4f46e5"
+          fill="#FFB800"
           viewBox="0 0 24 24"
           strokeWidth="1.5"
-          stroke="currentColor"
+          stroke="#FFB800"
           className="w-6 h-6"
         >
           <path
