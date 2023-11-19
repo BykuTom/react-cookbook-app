@@ -10,7 +10,11 @@ export const CookbookDisplay = ({ current, setCurrent }) => {
         <div className="mb-2 w-full h-[4rem] p-2 bg-orange-200 rounded-md flex flex-row gap-2 justify-between">
           {state.cookbooks.map((cookbook) => {
             if (cookbook.id === current) {
-              return <p className="text-black">{cookbook.description}</p>;
+              return (
+                <p className="text-black" key={cookbook.title}>
+                  {cookbook.description}
+                </p>
+              );
             }
           })}
           <button

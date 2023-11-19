@@ -1,3 +1,5 @@
+import { setToLocalStorage } from "../utils/utilities";
+
 export const appReducer = (state, action) => {
   if (action.type === "CREATE_NEW_COOKBOOK") {
     const newCookbooks = [action.payload, ...state.cookbooks];
@@ -12,7 +14,6 @@ export const appReducer = (state, action) => {
 
   if (action.type === "ADD_RECIPE_TO_COOKBOOK") {
     const newCookbooks = state.cookbooks.map((cookbook) => {
-      console.log(cookbook.id + " " + action.payload.cookbookID);
       if (cookbook.id === action.payload.cookbookID) {
         return {
           ...cookbook,
@@ -56,7 +57,6 @@ export const appReducer = (state, action) => {
   }
 
   if (action.type === "REMOVE_COOKBOOK") {
-    console.log(action);
     const { cookbookID } = action.payload;
 
     const newCookbooks = state.cookbooks.filter((cookbook) => {
@@ -71,5 +71,19 @@ export const appReducer = (state, action) => {
     };
   }
 
+  if (action.type === "SET_MY_COOKBOOKS") {
+    setToLocalStorage("mycookbooks", action.payload || []);
+    return {
+      ...state,
+      myCookBooks: action.payload || [],
+    };
+  }
+
+  if (action.type === "LOGIN") {
+    return { ...state, user: action.payload };
+  }
+  if (action.type === "LOGOUT") {
+    return { ...state, user: null };
+  }
   return state;
 };

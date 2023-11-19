@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { CreateCookBookModal } from "../components/myCookbooks/CreateCookbookModal";
 import { useApp } from "../context/AppProvider";
 import { RadioGroup } from "@headlessui/react";
-import { RecipeCard } from "../components/search/RecipeCard";
+
 import { CookbookDisplay } from "../components/myCookbooks/CookbookDisplay";
 
 export const MyCookbooks = () => {
@@ -24,7 +24,7 @@ export const MyCookbooks = () => {
 
   return (
     <div className="w-full min-h-[calc(100vh-7rem)] p-2 flex bg-orange-50">
-      <div className="p-2 mr-2 rounded-lg flex-1 bg-orange-100 transition-all max-w-[20rem] duration-300 flex flex-col justify-center align-top">
+      <div className="p-2 mr-2 rounded-lg flex-1 bg-orange-100 transition-all w-[15rem] duration-300 flex flex-col justify-center align-top">
         <button
           type="button"
           onClick={openModal}
@@ -33,7 +33,7 @@ export const MyCookbooks = () => {
           Create a new Cookbook
         </button>
         <RadioGroup
-          className="mt-2 w-full h-full bg-orange-200 rounded-lg p-2 overflow-scroll"
+          className="mt-2 w-full h-full bg-orange-200 rounded-lg p-2 overflow-y-scroll"
           value={current}
           onChange={setCurrent}
         >
@@ -44,13 +44,17 @@ export const MyCookbooks = () => {
             state.cookbooks.length > 0 &&
             state.cookbooks.map((cookbook) => {
               return (
-                <RadioGroup.Option value={cookbook.id} className="mb-2">
+                <RadioGroup.Option
+                  key={cookbook.id}
+                  value={cookbook.id}
+                  className="mb-2"
+                >
                   {({ checked }) => (
                     <div
                       className={
                         checked
-                          ? "text-md text-white btn btn-warning w-full"
-                          : "text-md text-black btn btn-outline-warning w-full"
+                          ? "text-md text-white btn btn-warning w-full max-w-[12rem]"
+                          : "text-md text-black btn btn-outline-warning w-full max-w-[12rem]"
                       }
                     >
                       {cookbook.name}

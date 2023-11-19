@@ -2,10 +2,10 @@ import { HeroBanner } from "../components/home/HeroBanner";
 import { useRecipeSearch } from "../hooks/useRecipeSearch";
 
 export const Home = () => {
-  const query = "burgers";
+  /* const query = "burgers";
   const filters = {
     cuisine: "american",
-    diet: null, // could be something like vegan but its commented out for now.
+    diet: null,
     intolerances: "glutten",
     mealType: "main course",
     includeIngredients: "cheese",
@@ -16,8 +16,7 @@ export const Home = () => {
 
   const { data, isLoading, error } = useRecipeSearch(query, filters);
 
-  console.log(data);
-  error && console.log(error);
+  error && console.log(error); */
 
   return (
     <div className="min-w-screen min-h-screen bg-orange-50">

@@ -5,7 +5,7 @@ import * as Yup from "yup";
 import { useApp } from "../../context/AppProvider";
 
 export const CreateCookBookModal = ({ isOpen, closeModal }) => {
-  const { dispatch } = useApp();
+  const { state, dispatch } = useApp();
 
   const formik = useFormik({
     initialValues: {
@@ -15,9 +15,12 @@ export const CreateCookBookModal = ({ isOpen, closeModal }) => {
     onSubmit: ({ name, description }) => {
       const newCookBook = {
         id: crypto.randomUUID(),
+        author: state.user.id,
         name: name,
         description: description,
         items: [],
+        likes: [],
+        comments: [],
       };
 
       dispatch({ type: "CREATE_NEW_COOKBOOK", payload: newCookBook });
