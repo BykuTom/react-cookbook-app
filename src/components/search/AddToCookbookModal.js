@@ -73,9 +73,9 @@ export const AddToCookbookModal = ({ isOpen, closeModal, recipe }) => {
                         Add recipe to a new Cookbook
                       </button>
 
-                      {state.cookbooks &&
-                        state.cookbooks.length > 0 &&
-                        state.cookbooks.map((cookbook) => {
+                      {state.myCookBooks &&
+                        state.myCookBooks.length > 0 &&
+                        state.myCookBooks.map((cookbook) => {
                           return (
                             <RadioGroup.Option
                               value={cookbook.id}

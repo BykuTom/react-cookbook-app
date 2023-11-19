@@ -11,12 +11,7 @@ export const NavBar = () => {
 
   const { state, dispatch } = useApp();
 
-  const [navigationItems, setNavigationItems] = useState([
-    { name: "Home", href: "/", current: true },
-    { name: "Search", href: "/search", current: false },
-    { name: "Recipe List", href: "/dashboard", current: false },
-    { name: "My Cookbooks", href: "/mycookbooks", current: false },
-  ]);
+  const [navigationItems, setNavigationItems] = useState([]);
 
   const location = useLocation();
   const navigationItemsRef = useRef(navigationItems);
@@ -41,6 +36,21 @@ export const NavBar = () => {
   useEffect(() => {
     navigationItemsRef.current = navigationItems;
   }, [navigationItems]);
+
+  useEffect(() => {
+    const updatedNavigationItems = [
+      { name: "Home", href: "/", current: true },
+      { name: "Search", href: "/search", current: false },
+      { name: "Recipe List", href: "/dashboard", current: false },
+      state.user && {
+        name: "My Cookbooks",
+        href: "/mycookbooks",
+        current: false,
+      },
+    ].filter(Boolean);
+    console.log(updatedNavigationItems);
+    setNavigationItems(updatedNavigationItems);
+  }, [state.user]);
 
   useEffect(() => {
     !state.user && navigate("/");
