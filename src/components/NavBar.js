@@ -1,10 +1,11 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useApp } from "../context/AppProvider";
 import noUser from "../assets/images/nouser.png";
+import { NavbarButtons } from "./NavbarButtons";
 
 export const NavBar = () => {
   const navigate = useNavigate();
@@ -14,7 +15,6 @@ export const NavBar = () => {
   const [navigationItems, setNavigationItems] = useState([]);
 
   const location = useLocation();
-  const navigationItemsRef = useRef(navigationItems);
 
   function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
@@ -23,21 +23,6 @@ export const NavBar = () => {
   useEffect(() => {
     const currentPath = location.pathname;
 
-    if (navigationItemsRef.current.some((item) => item.href === currentPath)) {
-      const updatedItems = navigationItemsRef.current.map((item) => ({
-        ...item,
-        current: item.href === currentPath,
-      }));
-
-      setNavigationItems(updatedItems);
-    }
-  }, [location.pathname]);
-
-  useEffect(() => {
-    navigationItemsRef.current = navigationItems;
-  }, [navigationItems]);
-
-  useEffect(() => {
     const updatedNavigationItems = [
       { name: "Home", href: "/", current: true },
       { name: "Search", href: "/search", current: false },
@@ -48,16 +33,25 @@ export const NavBar = () => {
         current: false,
       },
     ].filter(Boolean);
-    console.log(updatedNavigationItems);
-    setNavigationItems(updatedNavigationItems);
-  }, [state.user]);
+
+    if (updatedNavigationItems.some((item) => item.href === currentPath)) {
+      const updatedItems = updatedNavigationItems.map((item) => ({
+        ...item,
+        current: item.href === currentPath,
+      }));
+
+      setNavigationItems(updatedItems);
+    } else {
+      setNavigationItems(updatedNavigationItems);
+    }
+  }, [state.user, location.pathname]);
 
   useEffect(() => {
     !state.user && navigate("/");
   }, [state.user]);
 
   return (
-    <Disclosure as="nav" className="bg-orange-200 h-[4rem]">
+    <Disclosure as="nav" className="bg-orange-200 h-[4rem] relative z-20">
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -83,27 +77,18 @@ export const NavBar = () => {
                   />
                 </div>
                 <div className="hidden sm:ml-6 sm:block">
-                  <div className="flex space-x-4">
-                    {navigationItems.map((item) => (
-                      <Link
-                        key={item.name}
-                        to={item.href}
-                        className={classNames(
-                          item.current
-                            ? "bg-yellow-300 text-black"
-                            : "text-black hover:bg-red-400 hover:text-black",
-                          "rounded-md px-3 py-2 text-sm font-medium"
-                        )}
-                        aria-current={item.current ? "page" : undefined}
-                      >
-                        {item.name}
-                      </Link>
-                    ))}
-                  </div>
+                  {
+                    <NavbarButtons
+                      key={state.user ? "loggedIn" : "loggedOut"}
+                      variant={false}
+                      navigationItems={navigationItems}
+                      navigate={navigate}
+                      classNames={classNames}
+                    />
+                  }
                 </div>
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                {/* Profile dropdown */}
                 {state.user ? (
                   <Menu as="div" className="relative ml-3">
                     <div>
@@ -183,26 +168,15 @@ export const NavBar = () => {
           </div>
 
           <Disclosure.Panel className="sm:hidden">
-            <div className="space-y-1 px-2 pb-3 pt-2 flex flex-col">
-              {navigationItems.map((item) => (
-                <Disclosure.Button
-                  key={item.name}
-                  as="button"
-                  onClick={() => {
-                    navigate(item.href);
-                  }}
-                  className={classNames(
-                    item.current
-                      ? "bg-yellow-300 text-black"
-                      : "text-black hover:bg-red-400 hover:text-black",
-                    "rounded-md px-3 py-2 text-sm font-medium"
-                  )}
-                  aria-current={item.current ? "page" : undefined}
-                >
-                  {item.name}
-                </Disclosure.Button>
-              ))}
-            </div>
+            {
+              <NavbarButtons
+                key={state.user ? "loggedIn" : "loggedOut"}
+                variant={true}
+                navigationItems={navigationItems}
+                navigate={navigate}
+                classNames={classNames}
+              />
+            }
           </Disclosure.Panel>
         </>
       )}
