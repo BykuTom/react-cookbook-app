@@ -25,7 +25,7 @@ export const MyCookbooks = () => {
   }, [state.user]);
 
   return (
-    <div className="w-full min-h-[calc(100vh-7rem)] p-2 flex bg-orange-50">
+    <div className="w-full h-full min-h-[calc(100vh-7.3rem)] p-2 flex bg-orange-50">
       {state.user && (
         <div className="p-2 mr-2 rounded-lg flex-1 bg-orange-100 transition-all w-[12rem] duration-300 flex flex-col justify-center align-top">
           <button
