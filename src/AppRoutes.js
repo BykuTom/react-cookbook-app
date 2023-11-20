@@ -15,7 +15,7 @@ export const AppRoutes = () => {
       <Route path="/login" element={<Login />} />
       <Route path="/search" element={<Search />} />
       <Route path="/community" element={<CookbookDashboard />} />
-      <Route path="/community/cookbookID" element={<Cookbook />} />
+      <Route path="/community/:cookbookID" element={<Cookbook />} />
       <Route path="/mycookbooks" element={<MyCookbooks />} />
       <Route path="/recipe/:recipeID" element={<Recipe />} />
       <Route path="/*" element={<NoMatch />} />

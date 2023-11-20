@@ -44,14 +44,14 @@ export const RecipeCard = ({ recipe, variant, cookbookID }) => {
         <p className="text-black">{parseToHTML(string)}</p>
         <div className="card-footer flex flex-col gap-2 justify-center sm:mt-auto sm:flex-row">
           <button
-            className="btn-warning btn mx-auto font-bold text-lg p-1 w-full sm:w-auto"
+            className="btn-warning btn mx-auto font-bold text-lg p-1"
             onClick={handleRecipeNavigate}
           >
             Start Cooking!
           </button>
           {variant ? (
             <button
-              className="btn-danger btn mx-auto font-bold text-md p-1 w-full sm:w-auto"
+              className="btn-danger btn mx-auto font-bold text-md p-1"
               type="button"
               onClick={() => {
                 dispatch({
@@ -67,7 +67,7 @@ export const RecipeCard = ({ recipe, variant, cookbookID }) => {
             </button>
           ) : (
             <button
-              className="btn-danger btn mx-auto font-bold text-lg p-1 w-full sm:w-auto"
+              className="bg-[#64d97b] btn mx-auto font-bold text-lg p-1 w-full sm:w-auto"
               type="button"
               onClick={openModal}
             >

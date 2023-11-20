@@ -51,7 +51,7 @@ export const NavBar = () => {
   }, [state.user]);
 
   return (
-    <Disclosure as="nav" className="bg-orange-200 h-[4rem] shadow-md relative z-20">
+    <Disclosure as="nav" className="bg-[#EEE0CB] h-[4rem] relative z-20">
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
