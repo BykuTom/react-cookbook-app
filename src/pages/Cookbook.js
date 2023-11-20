@@ -9,9 +9,16 @@ export const Cookbook = () => {
     return cookbook.id === cookbookID;
   });
 
-  // Check if the cookbook is found
+  console.log(cookbookID);
+  console.log(state.cookbooks);
+  console.log(filteredCookbooks);
+
   if (filteredCookbooks.length === 0) {
-    return <div>Cookbook not found</div>;
+    return (
+      <div className="bg-orange-50 text-black h-[calc(100vh-4rem)]">
+        Cookbook not found
+      </div>
+    );
   }
 
   const cookbook = filteredCookbooks[0];

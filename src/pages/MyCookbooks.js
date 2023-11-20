@@ -31,12 +31,12 @@ export const MyCookbooks = () => {
           <button
             type="button"
             onClick={openModal}
-            className="btn btn-error w-full drop-shadow-md"
+            className="btn bg-[#FE5F55] w-full drop-shadow-md"
           >
             Create a new Cookbook
           </button>
           <RadioGroup
-            className="mt-2 w-[11rem] h-full bg-orange-200 rounded-lg p-2 overflow-y-scroll"
+            className="mt-2 w-[11rem] h-full bg-[#EEE0CB] rounded-lg p-2 overflow-y-auto"
             value={current}
             onChange={setCurrent}
           >
@@ -56,8 +56,8 @@ export const MyCookbooks = () => {
                       <div
                         className={
                           checked
-                            ? "text-md text-white btn btn-warning w-full max-w-[12rem]"
-                            : "text-md text-black btn btn-outline-warning w-full max-w-[12rem]"
+                            ? "text-md text-stone-700 btn bg-[#64d97b] w-full max-w-[12rem]"
+                            : "text-md text-stone-700 btn btn-outline border-[#64d97b] hover:bg-[#64d97b]  w-full max-w-[12rem]"
                         }
                       >
                         {cookbook.name}

@@ -32,7 +32,7 @@ export const RecipeCard = ({ recipe, variant, cookbookID }) => {
   }
 
   return (
-    <div className="card card-image-cover h-[35rem] bg-gray-50 drop-shadow-lg">
+    <div className="card card-image-cover h-[35rem] bg-orange-50 drop-shadow-lg">
       <AddToCookbookModal
         isOpen={isOpen}
         closeModal={closeModal}
@@ -40,18 +40,18 @@ export const RecipeCard = ({ recipe, variant, cookbookID }) => {
       />
       <img src={recipe.image} alt="" />
       <div className="card-body py-4">
-        <h2 className="card-header text-black">{recipe.title}</h2>
+        <h2 className="card-header text-black font-bold">{recipe.title}</h2>
         <p className="text-black h-[7.5rem]">{parseToHTML(string)}</p>
         <div className="card-footer">
           <button
-            className="btn-warning btn mx-auto font-bold text-lg p-1"
+            className="bg-[#FE5F55] px-2 btn mx-auto font-bold text-lg"
             onClick={handleRecipeNavigate}
           >
             Start Cooking!
           </button>
           {variant ? (
             <button
-              className="btn-danger btn mx-auto font-bold text-md p-1"
+              className="bg-[#64d97b] btn mx-auto font-bold text-md p-1"
               type="button"
               onClick={() => {
                 dispatch({
@@ -67,7 +67,7 @@ export const RecipeCard = ({ recipe, variant, cookbookID }) => {
             </button>
           ) : (
             <button
-              className="btn-danger btn mx-auto font-bold text-lg p-1"
+              className="bg-[#64d97b] btn mx-auto font-bold text-lg p-1"
               type="button"
               onClick={openModal}
             >
