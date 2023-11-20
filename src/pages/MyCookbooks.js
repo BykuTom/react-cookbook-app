@@ -27,7 +27,7 @@ export const MyCookbooks = () => {
   return (
     <div className="w-full min-h-[calc(100vh-7rem)] p-2 flex bg-orange-50">
       {state.user && (
-        <div className="p-2 mr-2 rounded-lg flex-1 bg-orange-100 transition-all w-[15rem] duration-300 flex flex-col justify-center align-top">
+        <div className="p-2 mr-2 rounded-lg flex-1 bg-orange-100 transition-all w-[12rem] duration-300 flex flex-col justify-center align-top">
           <button
             type="button"
             onClick={openModal}
@@ -36,7 +36,7 @@ export const MyCookbooks = () => {
             Create a new Cookbook
           </button>
           <RadioGroup
-            className="mt-2 w-full h-full bg-orange-200 rounded-lg p-2 overflow-y-scroll"
+            className="mt-2 w-[11rem] h-full bg-orange-200 rounded-lg p-2 overflow-y-scroll"
             value={current}
             onChange={setCurrent}
           >
