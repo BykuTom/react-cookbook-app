@@ -25,8 +25,8 @@ export const NavBar = () => {
 
     const updatedNavigationItems = [
       { name: "Home", href: "/", current: true },
-      { name: "Search", href: "/search", current: false },
-      { name: "Recipe List", href: "/dashboard", current: false },
+      { name: "Discover", href: "/search", current: false },
+      { name: "Community Hub", href: "/community", current: false },
       state.user && {
         name: "My Cookbooks",
         href: "/mycookbooks",
