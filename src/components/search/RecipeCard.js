@@ -51,7 +51,7 @@ export const RecipeCard = ({ recipe, variant, cookbookID }) => {
           </button>
           {variant ? (
             <button
-              className="bg-[#64d97b] btn mx-auto font-bold text-md p-1"
+              className="bg-[#64d97b] text-stone-600 btn mx-auto  text-md p-1"
               type="button"
               onClick={() => {
                 dispatch({

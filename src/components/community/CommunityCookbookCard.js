@@ -1,6 +1,9 @@
+import { useNavigate } from "react-router-dom";
 import { userData } from "../../assets/data/mockUserData";
 
 export const CommunityCookbookCard = ({ cookbook }) => {
+  const navigate = useNavigate();
+
   const getAuthor = () => {
     const user = userData.find((user) => user.id === cookbook.author);
     console.log(user);
@@ -28,7 +31,14 @@ export const CommunityCookbookCard = ({ cookbook }) => {
         <div className="divider divider-horizontal opacity-30 mx-6 my-0"></div>
         <div className="card-footer flex-col gap-2 justify-center">
           <div>Social Buttons</div>
-          <button className="btn-warning btn">View Cookbook</button>
+          <button
+            className="btn-warning btn"
+            onClick={() => {
+              navigate(`/community/${cookbook?.id}`);
+            }}
+          >
+            View Cookbook
+          </button>
         </div>
       </div>
     </div>

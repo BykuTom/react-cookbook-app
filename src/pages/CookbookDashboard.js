@@ -6,10 +6,10 @@ export const CookbookDashboard = () => {
   return (
     <div className="bg-orange-50 w-full min-h-[calc(100vh-7rem)] flex flex-col text-black gap-2 p-2">
       <CommunitySearch />
-      <div className="w-full bg-orange-100 rounded-lg p-2 h-[calc(100vh-8rem)] max-w-[90rem] mx-auto flex flex-col sm:flex-row gap-2">
-        <CommunityCategories />
+      <div className="w-full bg-orange-100  p-2 h-[calc(100vh-8rem)] max-w-[90rem] flex-wrap mx-auto rounded-lg flex flex-row gap-2 md:flex-col md:flex-nowrap overflow-x-hidden overflow-y-auto justify-center">
         <CommunityResults />
       </div>
     </div>
   );
 };
+<div className="bg-orange-200 w-full rounded-lg p-2 h-full flex flex-row gap-2 md:flex-col overflow-x-hidden overflow-y-auto "></div>;

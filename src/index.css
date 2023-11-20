@@ -11,13 +11,13 @@
 } */
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #fed7aa;
+  background: #fed;
   opacity: 0.2;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #fed;
+  background: #fed2aa;
   border-radius: 5px;
   opacity: 0.2;
 }
