@@ -9,7 +9,7 @@ export const Footer = () => {
           <a
             href="https://github.com/BykuTom/react-cookbook-app"
             target="_blank"
-            className="hover:bg-red-400 rounded-md px-3 py-2"
+            className="hover:bg-red-400 rounded-md px-3 py-2 hover:shadow-md"
           >
             Rocket™
           </a>
@@ -20,7 +20,7 @@ export const Footer = () => {
             <a
               href="https://github.com/BykuTom"
               target="_blank"
-              className="hover:bg-red-400 rounded-md px-3 py-2 text-sm font-medium me-4 md:me-6"
+              className="hover:bg-red-400 rounded-md px-3 py-2 text-sm font-medium me-4 md:me-6 hover:shadow-md"
             >
               Tomasz Wolak
             </a>
@@ -29,7 +29,7 @@ export const Footer = () => {
             <a
               href="https://github.com/artursrus"
               target="_blank"
-              className="hover:bg-red-400 rounded-md px-3 py-2 text-sm font-medium me-4 md:me-6"
+              className="hover:bg-red-400 rounded-md px-3 py-2 text-sm font-medium me-4 md:me-6 hover:shadow-md"
             >
               Arturs Ruskulis
             </a>

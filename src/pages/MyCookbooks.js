@@ -25,9 +25,9 @@ export const MyCookbooks = () => {
   }, [state.user]);
 
   return (
-    <div className="w-full min-h-[calc(100vh-7rem)] p-2 flex bg-orange-50">
+    <div className="w-full min-h-[calc(70vh-7rem)] p-2 flex flex-col items-center bg-orange-50 lg:flex-row lg:items-start lg:h-full ">
       {state.user && (
-        <div className="p-2 mr-2 rounded-lg flex-1 bg-orange-100 transition-all w-[15rem] duration-300 flex flex-col justify-center align-top">
+        <div className="p-2 w-full mt-1 mb-2 mr-2 rounded-lg flex-1 bg-orange-100 transition-all duration-300 justify-center align-top lg:min-w-[10rem] lg:min-h-[calc(100vh-7rem)] lg:align-top">
           <button
             type="button"
             onClick={openModal}
@@ -36,7 +36,7 @@ export const MyCookbooks = () => {
             Create a new Cookbook
           </button>
           <RadioGroup
-            className="mt-2 w-full h-full bg-orange-200 rounded-lg p-2 overflow-y-scroll"
+            className="mt-2 w-full min-h-[calc(55vh-7rem)] bg-orange-200 rounded-lg p-2 lg:min-h-[calc(100vh-11rem)]"
             value={current}
             onChange={setCurrent}
           >
@@ -50,14 +50,14 @@ export const MyCookbooks = () => {
                   <RadioGroup.Option
                     key={cookbook.id}
                     value={cookbook.id}
-                    className="mb-2"
+                    className="mb-2 w-full flex align-middle justify-center"
                   >
                     {({ checked }) => (
                       <div
                         className={
                           checked
-                            ? "text-md text-white btn btn-warning w-full max-w-[12rem]"
-                            : "text-md text-black btn btn-outline-warning w-full max-w-[12rem]"
+                            ? "text-md text-white btn btn-warning w-full"
+                            : "text-md text-black btn btn-outline-warning w-full"
                         }
                       >
                         {cookbook.name}

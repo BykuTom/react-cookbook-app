@@ -33,7 +33,7 @@ export const Search = () => {
   // }, [data]);
 
   return (
-    <div>
+    <div className="min-h-[calc(100vh-7rem)]">
       <SearchForm onSuccess={onSuccess} initialSearchTerm={searchTerm} />
       {/*   {isLoading && (
         <Dialog open={true} onClose={() => {}}>

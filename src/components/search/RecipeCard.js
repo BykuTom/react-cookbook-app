@@ -32,26 +32,26 @@ export const RecipeCard = ({ recipe, variant, cookbookID }) => {
   }
 
   return (
-    <div className="card card-image-cover h-[35rem] bg-gray-50 drop-shadow-lg">
+    <div className="card w-full card-image-cover min-h-[35rem] bg-gray-50 drop-shadow-lg m-2 sm:m-0 sm:flex sm:flex-col ">
       <AddToCookbookModal
         isOpen={isOpen}
         closeModal={closeModal}
         recipe={recipe}
       />
       <img src={recipe.image} alt="" />
-      <div className="card-body py-4">
+      <div className="card-body py-4 sm:flex sm:flex-col sm:flex-grow">
         <h2 className="card-header text-black">{recipe.title}</h2>
-        <p className="text-black h-[7.5rem]">{parseToHTML(string)}</p>
-        <div className="card-footer">
+        <p className="text-black">{parseToHTML(string)}</p>
+        <div className="card-footer flex flex-col gap-2 justify-center sm:mt-auto sm:flex-row">
           <button
-            className="btn-warning btn mx-auto font-bold text-lg p-1"
+            className="btn-warning btn mx-auto font-bold text-lg p-1 w-full sm:w-auto"
             onClick={handleRecipeNavigate}
           >
             Start Cooking!
           </button>
           {variant ? (
             <button
-              className="btn-danger btn mx-auto font-bold text-md p-1"
+              className="btn-danger btn mx-auto font-bold text-md p-1 w-full sm:w-auto"
               type="button"
               onClick={() => {
                 dispatch({
@@ -67,7 +67,7 @@ export const RecipeCard = ({ recipe, variant, cookbookID }) => {
             </button>
           ) : (
             <button
-              className="btn-danger btn mx-auto font-bold text-lg p-1"
+              className="btn-danger btn mx-auto font-bold text-lg p-1 w-full sm:w-auto"
               type="button"
               onClick={openModal}
             >

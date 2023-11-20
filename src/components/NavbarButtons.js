@@ -19,7 +19,7 @@ export const NavbarButtons = ({
           className={classNames(
             item.current
               ? "bg-yellow-300 text-black"
-              : "text-black hover:bg-red-400 hover:text-black",
+              : "text-black hover:bg-red-400 hover:text-black ",
             "rounded-md px-3 py-2 text-sm font-medium"
           )}
           aria-current={item.current ? "page" : undefined}
@@ -36,8 +36,8 @@ export const NavbarButtons = ({
           to={item.href}
           className={classNames(
             item.current
-              ? "bg-yellow-300 text-black"
-              : "text-black hover:bg-red-400 hover:text-black",
+              ? "bg-yellow-300 text-black shadow-md"
+              : "text-black hover:bg-red-400 hover:text-black hover:shadow-md",
             "rounded-md px-3 py-2 text-sm font-medium"
           )}
           aria-current={item.current ? "page" : undefined}
