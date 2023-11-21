@@ -7,14 +7,16 @@ import { RecipeCard } from "../components/search/RecipeCard";
 
 export const Cookbook = () => {
   const { cookbookID } = useParams();
+  const [currentTab, setCurrentTab] = useState("Recipes");
   const { state, dispatch } = useApp();
   const [rating, setRating] = useState(
     averageRating(
       state.cookbooks.filter((cookbook) => {
         return cookbook.id === cookbookID;
-      })
+      })[0]
     )
   );
+
   const filteredCookbooks = state.cookbooks.filter((cookbook) => {
     return cookbook.id === cookbookID;
   });
@@ -31,7 +33,7 @@ export const Cookbook = () => {
   return (
     <div className="w-full h-[calc(100vh-4rem)] bg-orange-50 text-black p-2 flex flex-col gap-2">
       {cookbook && (
-        <div className="p-2 bg-[#EEE0CB] rounded-lg min-h-[5rem] flex flex-col gap-2">
+        <div className="p-2 bg-[#EEE0CB] rounded-lg h-fit flex flex-col gap-2">
           <div className="w-full flex flex-row gap-2">
             <h1 className="text-2xl font-bold">{cookbook.name}</h1>
             <Rating
@@ -48,14 +50,46 @@ export const Cookbook = () => {
           </div>
           <h2>By: {getAuthor(cookbook)}</h2>
           <p>{cookbook.description}</p>
+          <div className="w-full min-h-[3rem] bg-orange-100 rounded-lg p-2 flex flex-row justify-center items-center">
+            <div className="btn-group btn-group-scrollable">
+              <button
+                className="btn bg-[#FE5F55]"
+                onClick={() => {
+                  setCurrentTab("Recipes");
+                }}
+              >
+                Recipes
+              </button>
+              <button
+                className="btn bg-[#FE5F55]"
+                onClick={() => {
+                  setCurrentTab("Reviews");
+                }}
+              >
+                Reviews
+              </button>
+            </div>
+          </div>
         </div>
       )}
-      <div className="p-2 bg-[#EEE0CB] rounded-lg min-h-[25rem] flex flex-col gap-2">
-        {cookbook &&
-          cookbook.items.map((item) => {
-            <RecipeCard />;
-          })}
-      </div>
+
+      {currentTab === "Recipes" && (
+        <div className="p-2 bg-[#EEE0CB] rounded-lg items-center  flex flex-col overflow-y-auto md:flex-row md:flex-wrap md:justify-around gap-2">
+          {cookbook.items &&
+            cookbook.items.map((item) => {
+              return (
+                <RecipeCard
+                  key={item.id}
+                  recipe={item}
+                  cookbookID={cookbook.id}
+                />
+              );
+            })}
+        </div>
+      )}
+      {currentTab === "Reviews" && (
+        <div className="p-2 bg-[#EEE0CB] rounded-lg">Review Tab</div>
+      )}
     </div>
   );
 };
