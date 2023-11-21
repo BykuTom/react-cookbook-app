@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useRecipeSearch } from "../hooks/useRecipeSearch";
-import { SearchForm } from "../components/SearchForm";
+import { SearchForm } from "../components/search/SearchForm";
 import * as utils from "../utils/utilities";
 import { SearchResults } from "../components/search/SearchResults";
 //import { Sparkles } from "heroicons-react";
@@ -23,13 +23,6 @@ export const Search = () => {
     setSearchTerm(query);
     /*  setFilterTerm([filters]); */
   };
-
-  // useEffect(() => {
-  /* console.log(searchParams.get("q"));
-    console.log(searchParams.get("f"));
-     */
-  //console.log(data);
-  // }, [data]);
 
   return (
     <div className="min-h-[calc(100vh-8rem)] w-full p-2 bg-orange-50">

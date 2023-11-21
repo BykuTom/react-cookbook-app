@@ -15,12 +15,14 @@ const intolerancesOptions = [
   { value: "wheat", label: "Wheat" },
 ];
 
-export const MultiSelect = ({selectedValues, setSelectedValues}) => {
+export const MultiSelect = ({ selectedValues, setSelectedValues }) => {
   const handleChange = (intolerancesOption) => {
     //Extracting just value from intolerancesOption
+
     const intoleranceValue = intolerancesOption.map((option) => option.value);
+    //console.log(intoleranceValue.join(",")); // joins to return a ready to use param
     setSelectedValues(intoleranceValue);
-  }
+  };
 
   return (
     <Select
@@ -28,7 +30,7 @@ export const MultiSelect = ({selectedValues, setSelectedValues}) => {
       isMulti
       name="intolerances"
       options={intolerancesOptions}
-      className="basic-multi-select"
+      className="basic-multi-select text-black"
       classNamePrefix="select"
       placeholder="Intolerances"
       onChange={handleChange}
