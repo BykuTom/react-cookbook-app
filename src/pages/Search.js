@@ -17,10 +17,10 @@ export const Search = () => {
 
   const onSuccess = ([{ query }, filters]) => {
     console.log(query);
-    console.log(filters); // filters to be fixed
+    //console.log(filters); // filters to be fixed
     setSearchParams({ q: query }, { f: filters });
 
-    setSearchTerm([query]);
+    setSearchTerm(query);
     /*  setFilterTerm([filters]); */
   };
 
@@ -54,6 +54,11 @@ export const Search = () => {
                 <div class="spinner-dot"></div>
               </div>
             )}
+            {error || (data && data.length === 0) ? (
+              <h2 className="text-error">
+                Sorry, stuff you're looking for can't be found.
+              </h2>
+            ) : null}
           </div>
         )}
       </div>
