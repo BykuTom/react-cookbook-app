@@ -56,10 +56,10 @@ export const Recipe = () => {
           </button>
         </div>
         <div className="w-full min-h-[calc(100vh-7rem)] bg-orange-50 p-4 pt-10">
-          <div className="overflow-hidden bg-orange-100 py-8 md:mx-4 drop-shadow-lg rounded-md text-black">
+          <div className="overflow-hidden bg-orange-100 py-8 md:m-4 drop-shadow-lg rounded-md text-black p-4 m-1">
             {currentTab === 0 && (
               <div>
-                <p>Cooking Steps</p>
+                <h3 className="text-3xl pb-2">Cooking Steps:</h3>
                 {analyzedInstructions[0].steps.map((step, index) => (
                   <div className="text-black" key={index}>
                     <p>
@@ -71,12 +71,19 @@ export const Recipe = () => {
             )}
             {currentTab === 1 && (
               <div>
-                <p>Nutrition</p>
+                <h3 className="text-3xl pb-2">Nutrition Per Serving:</h3>
+                {
+                  nutrition.nutrients.map((nutrient, index) => (
+                    <div className="text-black p-1" key={index}>
+                      <p>{nutrient.name}: {nutrient.amount.toFixed(2)}{nutrient.unit}</p>
+                    </div>
+                  ))
+                }
               </div>
             )}
             {currentTab === 2 && (
               <div>
-                <p>Taste</p>
+                <h3 className="text-3xl pb-2">Taste</h3>
               </div>
             )}
           </div>
