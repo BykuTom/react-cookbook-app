@@ -77,7 +77,7 @@ export const Recipe = () => {
                   <h3 className="text-3xl pb-2">Cooking Steps:</h3>
                   {recipe.analyzedInstructions[0]?.steps.map((step, index) => (
                     <div className="text-black" key={index}>
-                      <p>
+                      <p className="p-1">
                         {index + 1}. {step.step}
                       </p>
                     </div>
@@ -105,7 +105,15 @@ export const Recipe = () => {
                   })}
                 </div>
               )}
-              {currentTab === 2 && <div></div>}
+              {currentTab === 2 && (
+              <div>
+                <h3 className="text-3xl pb-2">Ingredients</h3>
+                {recipe.extendedIngredients?.map((ingredient, index) => (
+                  <div className="text-black" key={index}> 
+                    <p className="p-1">{index +1}. {ingredient.original}</p>
+                  </div>
+                ))}
+              </div>)}
             </div>
           )}
         </div>

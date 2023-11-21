@@ -32,7 +32,7 @@ export const RecipeCard = ({ recipe, variant, cookbookID }) => {
   }
 
   return (
-    <div className="card w-full card-image-cover min-h-[35rem] bg-gray-50 drop-shadow-lg m-2 sm:m-0 sm:flex sm:flex-col ">
+    <div className="card w-full card-image-cover min-h-[35rem] bg-orange-50 drop-shadow-lg m-2 sm:m-0 sm:flex sm:flex-col transform hover:drop-shadow-2xl">
       <AddToCookbookModal
         isOpen={isOpen}
         closeModal={closeModal}
@@ -40,11 +40,14 @@ export const RecipeCard = ({ recipe, variant, cookbookID }) => {
       />
       <img src={recipe.image} alt="" />
       <div className="card-body py-4 sm:flex sm:flex-col sm:flex-grow">
-        <h2 className="card-header text-black">{recipe.title}</h2>
+        <div className="flex flex-row justify-between text-center">
+          <h2 className="card-header text-black text-left">{recipe.title}</h2>
+          <h2 className=" card-header text-black">{recipe.readyInMinutes} mins</h2>
+        </div>
         <p className="text-black">{parseToHTML(string)}</p>
-        <div className="card-footer flex flex-col gap-2 justify-center sm:mt-auto sm:flex-row">
+        <div className="card-footer flex flex-col gap-2 justify-center w-full sm:mt-auto sm:flex-row">
           <button
-            className="btn-warning btn mx-auto font-bold text-lg p-1"
+            className="btn-warning btn mx-auto font-bold text-lg p-1 md:w-[45%] w-full drop-shadow hover:shadow-lg text-gray-800"
             onClick={handleRecipeNavigate}
           >
             Start Cooking!
@@ -67,7 +70,7 @@ export const RecipeCard = ({ recipe, variant, cookbookID }) => {
             </button>
           ) : (
             <button
-              className="bg-[#64d97b] btn mx-auto font-bold text-lg p-1 w-full sm:w-auto"
+              className="bg-[#64d97b] btn mx-auto font-bold text-lg p-1 w-full md:w-[50%] sm:w-auto drop-shadow hover:shadow-lg text-gray-800"
               type="button"
               onClick={openModal}
             >
