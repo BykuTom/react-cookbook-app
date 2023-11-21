@@ -1,54 +1,14 @@
 import { useNavigate } from "react-router-dom";
-import { userData } from "../../assets/data/mockUserData";
 import { Rating } from "react-simple-star-rating";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useApp } from "../../context/AppProvider";
+import { getAuthor, handleRating, averageRating } from "../../utils/utilities";
 
 export const CommunityCookbookCard = ({ cookbook }) => {
   const { state, dispatch } = useApp();
 
-  const averageRating = () => {
-    let overallScore = 0;
-    let numberOfUniqueRatings = 0;
-
-    if (cookbook.rating) {
-      cookbook.rating.forEach((rating) => {
-        overallScore += rating.score;
-        numberOfUniqueRatings += 1;
-      });
-    }
-
-    if (numberOfUniqueRatings === 0) {
-      return 0;
-    }
-
-    return overallScore / numberOfUniqueRatings;
-  };
-
-  const [rating, setRating] = useState(averageRating);
+  const [rating, setRating] = useState(averageRating(cookbook));
   const navigate = useNavigate();
-
-  const handleRating = (rating) => {
-    if (state.user) {
-      const payload = {
-        cookbookID: cookbook.id,
-        ratingObject: {
-          author: state.user.id,
-          score: rating,
-        },
-      };
-      dispatch({ type: "RATE_COOKBOOK", payload: payload });
-      setRating(rating);
-    } else {
-      console.log("Please Log in"); // Dispalay loggin alert modal
-    }
-  };
-
-  const getAuthor = () => {
-    const user = userData.find((user) => user.id === cookbook.author);
-
-    return user.username;
-  };
 
   return (
     <div className="card bg-orange-50 md:flex-row md:max-w-[100%]">
@@ -67,7 +27,9 @@ export const CommunityCookbookCard = ({ cookbook }) => {
               {cookbook?.name || "Cookbook Title Goes here"}
             </h2>
             <Rating
-              onClick={handleRating}
+              onClick={(event) => {
+                handleRating(event, state, dispatch, cookbook, setRating);
+              }}
               size={36}
               className="flex flex-row "
               transition
@@ -77,7 +39,7 @@ export const CommunityCookbookCard = ({ cookbook }) => {
             />
           </div>
         </div>
-        <h3 className="mt-[-12px]">By: {getAuthor()}</h3>
+        <h3 className="mt-[-12px]">By: {getAuthor(cookbook)}</h3>
         <p className="text-stone-600">
           {cookbook?.description || "Cookbook description"}
         </p>
