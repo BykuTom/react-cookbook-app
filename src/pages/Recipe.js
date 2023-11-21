@@ -72,13 +72,14 @@ export const Recipe = () => {
             {currentTab === 1 && (
               <div>
                 <h3 className="text-3xl pb-2">Nutrition Per Serving:</h3>
-                {
-                  nutrition.nutrients.map((nutrient, index) => (
-                    <div className="text-black p-1" key={index}>
-                      <p>{nutrient.name}: {nutrient.amount.toFixed(2)}{nutrient.unit}</p>
-                    </div>
-                  ))
-                }
+                {nutrition.nutrients.map((nutrient, index) => (
+                  <div className="text-black p-1" key={index}>
+                    <p>
+                      {nutrient.name}: {nutrient.amount.toFixed(2)}
+                      {nutrient.unit}
+                    </p>
+                  </div>
+                ))}
               </div>
             )}
             {currentTab === 2 && (
