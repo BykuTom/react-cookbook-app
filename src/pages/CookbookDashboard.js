@@ -6,7 +6,7 @@ export const CookbookDashboard = () => {
   return (
     <div className="bg-orange-50 w-full min-h-[calc(100vh-7rem)] flex flex-col text-black gap-2 p-2">
       <CommunitySearch />
-      <div className="w-full bg-orange-100  p-2 h-[calc(100vh-8rem)] max-w-[90rem] flex-wrap mx-auto rounded-lg flex flex-row gap-2 md:flex-col md:flex-nowrap overflow-x-hidden overflow-y-auto justify-center">
+      <div className="w-full bg-orange-100  p-2 h-[calc(100vh-8rem)] max-w-[90rem] flex-wrap mx-auto rounded-lg flex flex-row gap-2 md:flex-col md:flex-nowrap overflow-x-hidden overflow-y-auto justify-center md:justify-normal">
         <CommunityResults />
       </div>
     </div>

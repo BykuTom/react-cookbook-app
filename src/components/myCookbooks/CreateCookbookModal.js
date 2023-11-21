@@ -21,6 +21,7 @@ export const CreateCookBookModal = ({ isOpen, closeModal }) => {
         items: [],
         likes: [],
         comments: [],
+        rating: [],
       };
 
       dispatch({ type: "CREATE_NEW_COOKBOOK", payload: newCookBook });

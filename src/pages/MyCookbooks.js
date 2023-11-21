@@ -36,7 +36,7 @@ export const MyCookbooks = () => {
             Create a new Cookbook
           </button>
           <RadioGroup
-            className="mt-2 w-full min-h-[calc(55vh-7rem)] bg-[#EEE0CB] rounded-lg p-2 lg:min-h-[calc(100vh-11rem)] overflow-y-auto "
+            className="mt-2 w-full bg-[#EEE0CB] rounded-lg p-2 lg:min-h-[calc(100vh-11rem)] overflow-y-auto "
             value={current}
             onChange={setCurrent}
           >

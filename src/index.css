@@ -26,3 +26,7 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #fdba74;
 }
+
+svg.star-svg {
+  display: inline;
+}

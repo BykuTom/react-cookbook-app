@@ -1,12 +1,52 @@
 import { useNavigate } from "react-router-dom";
 import { userData } from "../../assets/data/mockUserData";
+import { Rating } from "react-simple-star-rating";
+import { useEffect, useState } from "react";
+import { useApp } from "../../context/AppProvider";
 
 export const CommunityCookbookCard = ({ cookbook }) => {
+  const { state, dispatch } = useApp();
+
+  const averageRating = () => {
+    let overallScore = 0;
+    let numberOfUniqueRatings = 0;
+
+    if (cookbook.rating) {
+      cookbook.rating.forEach((rating) => {
+        overallScore += rating.score;
+        numberOfUniqueRatings += 1;
+      });
+    }
+
+    if (numberOfUniqueRatings === 0) {
+      return 0;
+    }
+
+    return overallScore / numberOfUniqueRatings;
+  };
+
+  const [rating, setRating] = useState(averageRating);
   const navigate = useNavigate();
+
+  const handleRating = (rating) => {
+    if (state.user) {
+      const payload = {
+        cookbookID: cookbook.id,
+        ratingObject: {
+          author: state.user.id,
+          score: rating,
+        },
+      };
+      dispatch({ type: "RATE_COOKBOOK", payload: payload });
+      setRating(rating);
+    } else {
+      console.log("Please Log in"); // Dispalay loggin alert modal
+    }
+  };
 
   const getAuthor = () => {
     const user = userData.find((user) => user.id === cookbook.author);
-    console.log(user);
+
     return user.username;
   };
 
@@ -21,10 +61,23 @@ export const CommunityCookbookCard = ({ cookbook }) => {
         alt=""
       />
       <div className="card-body p-2 w-full">
-        <h2 className="card-header justify-center">
-          {cookbook?.name || "Cookbook Title Goes here"}
-        </h2>
-        <h3 className="text-center mt-[-12px]">{getAuthor()}</h3>
+        <div>
+          <div className="flex flex-row w-full justify-between ">
+            <h2 className="card-header text-center text-2xl">
+              {cookbook?.name || "Cookbook Title Goes here"}
+            </h2>
+            <Rating
+              onClick={handleRating}
+              size={36}
+              className="flex flex-row "
+              transition
+              allowFraction
+              readonly={!state.user}
+              initialValue={rating}
+            />
+          </div>
+        </div>
+        <h3 className="mt-[-12px]">By: {getAuthor()}</h3>
         <p className="text-stone-600">
           {cookbook?.description || "Cookbook description"}
         </p>
@@ -32,7 +85,7 @@ export const CommunityCookbookCard = ({ cookbook }) => {
         <div className="card-footer flex-col gap-2 justify-center">
           <div>Social Buttons</div>
           <button
-            className="btn-warning btn"
+            className="bg-[#FE5F55] btn"
             onClick={() => {
               navigate(`/community/${cookbook?.id}`);
             }}

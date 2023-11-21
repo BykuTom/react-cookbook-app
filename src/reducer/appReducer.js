@@ -85,5 +85,34 @@ export const appReducer = (state, action) => {
   if (action.type === "LOGOUT") {
     return { ...state, user: null };
   }
+
+  if (action.type === "RATE_COOKBOOK") {
+    const { ratingObject, cookbookID } = action.payload;
+
+    const newCookbooks = state.cookbooks.map((cookbook) => {
+      if (cookbook.id === cookbookID) {
+        if (cookbook.rating) {
+          const existingRatingIndex = cookbook.rating.findIndex(
+            (rating) => rating.author === ratingObject.author
+          );
+          if (existingRatingIndex !== -1) {
+            cookbook.rating[existingRatingIndex] = ratingObject;
+          } else {
+            cookbook.rating.push(ratingObject);
+          }
+        } else cookbook.rating = [ratingObject];
+
+        return cookbook;
+      } else return cookbook;
+    });
+
+    localStorage.setItem("cookbooks", JSON.stringify(newCookbooks));
+
+    return {
+      ...state,
+      cookbooks: newCookbooks,
+    };
+  }
+
   return state;
 };
