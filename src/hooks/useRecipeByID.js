@@ -20,6 +20,9 @@ export const useRecipeById = (recipeId) => {
                 "X-RapidAPI-Key": process.env.REACT_APP_X_RapidAPI_Key,
                 "X-RapidAPI-Host": process.env.REACT_APP_X_RAPID_API_HOST,
               },
+              params: {
+                includeNutrition: "true",
+              },
             }
           );
           if (response.status !== 200) {

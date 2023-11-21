@@ -1,5 +1,6 @@
 import parse from "html-react-parser";
 import { addDays } from "date-fns";
+import { userData } from "../assets/data/mockUserData";
 
 export const encodeURIObject = (object) => {
   if (object) {
@@ -56,4 +57,44 @@ export const getCookie = (name) => {
   }
 
   return null;
+};
+
+export const getAuthor = (cookbook) => {
+  const user = userData.find((user) => user.id === cookbook.author);
+
+  return user.username;
+};
+
+export const handleRating = (event, state, dispatch, cookbook, setRating) => {
+  if (state.user) {
+    const payload = {
+      cookbookID: cookbook.id,
+      ratingObject: {
+        author: state.user.id,
+        score: event,
+      },
+    };
+    dispatch({ type: "RATE_COOKBOOK", payload: payload });
+    setRating(event);
+  } else {
+    console.log("Please Log in"); // Dispalay loggin alert modal
+  }
+};
+
+export const averageRating = (cookbook) => {
+  let overallScore = 0;
+  let numberOfUniqueRatings = 0;
+
+  if (cookbook.rating) {
+    cookbook.rating.forEach((rating) => {
+      overallScore += rating.score;
+      numberOfUniqueRatings += 1;
+    });
+  }
+
+  if (numberOfUniqueRatings === 0) {
+    return 0;
+  }
+
+  return overallScore / numberOfUniqueRatings;
 };

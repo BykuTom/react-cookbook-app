@@ -1,21 +1,26 @@
 import { useParams } from "react-router-dom";
 import { useApp } from "../context/AppProvider";
+import { averageRating, getAuthor, handleRating } from "../utils/utilities";
+import { Rating } from "react-simple-star-rating";
+import { useState } from "react";
+import { RecipeCard } from "../components/search/RecipeCard";
 
 export const Cookbook = () => {
   const { cookbookID } = useParams();
-  const { state } = useApp();
-
+  const { state, dispatch } = useApp();
+  const [rating, setRating] = useState(
+    averageRating(
+      state.cookbooks.filter((cookbook) => {
+        return cookbook.id === cookbookID;
+      })
+    )
+  );
   const filteredCookbooks = state.cookbooks.filter((cookbook) => {
     return cookbook.id === cookbookID;
   });
-
-  console.log(cookbookID);
-  console.log(state.cookbooks);
-  console.log(filteredCookbooks);
-
   if (filteredCookbooks.length === 0) {
     return (
-      <div className="bg-orange-50 text-black h-[calc(100vh-4rem)]">
+      <div className="bg-orange-50 text-black h-[calc(100vh-4rem)] ">
         Cookbook not found
       </div>
     );
@@ -23,5 +28,34 @@ export const Cookbook = () => {
 
   const cookbook = filteredCookbooks[0];
 
-  return <>{cookbook && <div>{cookbook.name}</div>}</>;
+  return (
+    <div className="w-full h-[calc(100vh-4rem)] bg-orange-50 text-black p-2 flex flex-col gap-2">
+      {cookbook && (
+        <div className="p-2 bg-[#EEE0CB] rounded-lg min-h-[5rem] flex flex-col gap-2">
+          <div className="w-full flex flex-row gap-2">
+            <h1 className="text-2xl font-bold">{cookbook.name}</h1>
+            <Rating
+              size={36}
+              className="flex flex-row "
+              transition
+              allowFraction
+              readonly={!state.user}
+              initialValue={rating}
+              onClick={(event) => {
+                handleRating(event, state, dispatch, cookbook, setRating);
+              }}
+            />
+          </div>
+          <h2>By: {getAuthor(cookbook)}</h2>
+          <p>{cookbook.description}</p>
+        </div>
+      )}
+      <div className="p-2 bg-[#EEE0CB] rounded-lg min-h-[25rem] flex flex-col gap-2">
+        {cookbook &&
+          cookbook.items.map((item) => {
+            <RecipeCard />;
+          })}
+      </div>
+    </div>
+  );
 };
