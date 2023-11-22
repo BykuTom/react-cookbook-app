@@ -10,7 +10,7 @@ export const SearchForm = ({
   initialFilterTerm,
 }) => {
   // initialFilters to be added
-  const [showFilters, setShowFilters] = useState(true);
+  const [showFilters, setShowFilters] = useState(initialFilterTerm);
 
   const formik = useFormik({
     initialValues: {
@@ -91,7 +91,7 @@ export const SearchForm = ({
         </button>
       </div>
       {showFilters && (
-        <div className=" bg-[#EEE0CB] min-h-[5rem] w-full mt-2 p-2 rounded-lg flex flex-col">
+        <div className=" bg-[#EEE0CB] min-h-[5rem] w-full mt-2 p-2 rounded-lg flex flex-col gap-2">
           <IntoleranceMultiSelect
             selectedValues={formik.values.intolerances}
             setSelectedValues={(intolerances) =>
