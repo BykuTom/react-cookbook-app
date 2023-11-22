@@ -1,5 +1,6 @@
 import { HeroBanner } from "../components/home/HeroBanner";
 import { useRecipeSearch } from "../hooks/useRecipeSearch";
+import { AboutUs } from "../components/home/AboutUs";
 
 export const Home = () => {
   /* const query = "burgers";
@@ -21,6 +22,7 @@ export const Home = () => {
   return (
     <div className="min-w-screen min-h-screen bg-orange-50">
       <HeroBanner />
+      <AboutUs />
     </div>
   );
 };

@@ -14,11 +14,11 @@ export const BannerSlide = ({ title, summary, image, rating }) => {
                 alt="Product screenshot"
                 className="w-full max-w-[48rem] rounded-xl shadow-xl ring-1 ring-gray-400/10 "
               />
-              <div className="w-full min-h-[2rem] mt-4 flex flex-row gap-2 justify-end items-center">
-                <button className="btn btn-warning">Like</button>
-                <button className="btn btn-warning">Comment</button>
-                <button className="btn btn-warning">Subscribe</button>
-                <button className="btn btn-warning">Share</button>
+              <div className="w-full min-h-[2rem] mt-4 flex flex-col lg:flex-row gap-2 justify-end items-center">
+                <button className="btn btn-warning w-40">Like</button>
+                <button className="btn btn-warning w-40">Comment</button>
+                <button className="btn btn-warning w-40">Subscribe</button>
+                <button className="btn btn-warning w-40">Share</button>
               </div>
             </div>
             <div className="lg:pr-8 lg:pt-4">
