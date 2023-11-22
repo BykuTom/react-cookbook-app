@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useFormik } from "formik";
 import { IntoleranceMultiSelect } from "./IntoleranceMultiSelect";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import { CuisineMultiSelect } from "./CuisineMultiSelect";
 
 export const SearchForm = ({ onSuccess, initialSearchTerm }) => {
   // initialFilters to be added
@@ -85,11 +86,17 @@ export const SearchForm = ({ onSuccess, initialSearchTerm }) => {
         </button>
       </div>
       {showFilters && (
-        <div className=" bg-[#EEE0CB] min-h-[5rem] w-full mt-2 p-2 rounded-lg">
+        <div className=" bg-[#EEE0CB] min-h-[5rem] w-full mt-2 p-2 rounded-lg flex flex-col">
           <IntoleranceMultiSelect
             selectedValues={formik.values.intolerances}
             setSelectedValues={(intolerances) =>
               formik.setFieldValue("intolerances", intolerances)
+            }
+          />
+          <CuisineMultiSelect
+            selectedValues={formik.values.cuisine}
+            setSelectedValues={(cuisine) =>
+              formik.setFieldValue("cuisine", cuisine)
             }
           />
         </div>
