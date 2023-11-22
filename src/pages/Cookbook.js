@@ -5,7 +5,7 @@ import { Rating } from "react-simple-star-rating";
 import { useState } from "react";
 import { RecipeCard } from "../components/search/RecipeCard";
 import { ReviewDisplay } from "../components/cookbook/ReviewDisplay";
-import { CreateReviewModal } from "../components/cookbook/CreateReviewModal";
+import { WriteReviewForm } from "../components/cookbook/WriteReviewForm";
 
 export const Cookbook = () => {
   const { cookbookID } = useParams();
@@ -98,7 +98,7 @@ export const Cookbook = () => {
         )}
         {currentTab === "Reviews" && (
           <div className="p-2 bg-[#EEE0CB] rounded-lg h-full flex flex-col gap-2">
-            <CreateReviewModal />
+            <WriteReviewForm />
             <ReviewDisplay />
           </div>
         )}
