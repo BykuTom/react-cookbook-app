@@ -36,7 +36,7 @@ export const useRecipeSearch = ([query, filters]) => {
             }),
           }),
         };
-        console.log(params);
+
         setIsLoading(true);
 
         try {

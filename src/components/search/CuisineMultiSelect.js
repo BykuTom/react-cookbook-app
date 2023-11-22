@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Select from "react-select";
 
 const cuisineOptions = [
@@ -31,6 +32,11 @@ const cuisineOptions = [
 ];
 
 export const CuisineMultiSelect = ({ selectedValues, setSelectedValues }) => {
+  const selectedValuesArray = selectedValues.split(",");
+  const defaultValueArray = cuisineOptions.filter((defaultValue) => {
+    return selectedValuesArray.includes(defaultValue.value.toLowerCase());
+  });
+
   const handleChange = (cuisineOptions) => {
     const cuisinesValue = cuisineOptions.map((option) =>
       option.value.toLowerCase()
@@ -40,7 +46,7 @@ export const CuisineMultiSelect = ({ selectedValues, setSelectedValues }) => {
 
   return (
     <Select
-      defaultValue={selectedValues}
+      defaultValue={defaultValueArray}
       isMulti
       name="cuisine"
       options={cuisineOptions}

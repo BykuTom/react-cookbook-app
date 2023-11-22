@@ -32,7 +32,11 @@ export const Search = () => {
 
   return (
     <div className="min-h-[calc(100vh-8rem)] w-full p-2 bg-orange-50">
-      <SearchForm onSuccess={onSuccess} initialSearchTerm={searchTerm} />
+      <SearchForm
+        onSuccess={onSuccess}
+        initialSearchTerm={searchTerm}
+        initialFilterTerm={filterTerm}
+      />
       <div className="bg-orange-100 p-2 rounded-lg min-h-[calc(100vh-13.6rem)] flex flex-col items-center justify-center">
         {data && Array.isArray(data) && data.length > 0 ? (
           <SearchResults results={data} variant={false} />

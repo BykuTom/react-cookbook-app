@@ -4,14 +4,19 @@ import { IntoleranceMultiSelect } from "./IntoleranceMultiSelect";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { CuisineMultiSelect } from "./CuisineMultiSelect";
 
-export const SearchForm = ({ onSuccess, initialSearchTerm }) => {
+export const SearchForm = ({
+  onSuccess,
+  initialSearchTerm,
+  initialFilterTerm,
+}) => {
   // initialFilters to be added
   const [showFilters, setShowFilters] = useState(true);
 
   const formik = useFormik({
     initialValues: {
       query: initialSearchTerm || "",
-      intolerances: "",
+      intolerances: initialFilterTerm?.intolerances || "",
+      cuisine: initialFilterTerm?.cuisine || "",
     },
 
     onSubmit: (query) => {

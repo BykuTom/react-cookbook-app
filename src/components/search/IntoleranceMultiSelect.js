@@ -19,6 +19,11 @@ export const IntoleranceMultiSelect = ({
   selectedValues,
   setSelectedValues,
 }) => {
+  const selectedValuesArray = selectedValues.split(",");
+  const defaultValueArray = intolerancesOptions.filter((defaultValue) => {
+    return selectedValuesArray.includes(defaultValue.value.toLowerCase());
+  });
+
   const handleChange = (intolerancesOption) => {
     const intoleranceValue = intolerancesOption.map((option) => option.value);
     //console.log(intoleranceValue.join(","));
@@ -27,7 +32,7 @@ export const IntoleranceMultiSelect = ({
 
   return (
     <Select
-      defaultValue={selectedValues}
+      defaultValue={defaultValueArray}
       isMulti
       clearValue
       name="intolerances"
