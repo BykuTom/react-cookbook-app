@@ -1,24 +1,28 @@
 import React, { useState } from "react";
 import { useFormik } from "formik";
-import { MultiSelect } from "./MultiSelect";
+import { IntoleranceMultiSelect } from "./IntoleranceMultiSelect";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 
 export const SearchForm = ({ onSuccess, initialSearchTerm }) => {
   // initialFilters to be added
   const [showFilters, setShowFilters] = useState(true);
 
-  const dummyFilter = {
-    cusisine: "American",
-    mealType: "breakfast",
-  };
-
   const formik = useFormik({
     initialValues: {
       query: initialSearchTerm || "",
+      intolerances: "",
     },
 
-    onSubmit: (query, filters = dummyFilter) => {
-      onSuccess([query, filters]);
+    onSubmit: (query) => {
+      const filters = {
+        ...(query && {
+          ...(query.cuisine &&
+            query.cuisine !== "" && { cuisine: query.cuisine }),
+          ...(query.intolerances &&
+            query.intolerances !== "" && { intolerances: query.intolerances }),
+        }),
+      };
+      onSuccess([query.query, filters]);
     },
   });
 
@@ -70,6 +74,7 @@ export const SearchForm = ({ onSuccess, initialSearchTerm }) => {
           className="btn bg-[#FE5F55] aspect-square p-0"
           onClick={() => {
             setShowFilters(!showFilters);
+            formik.setFieldValue("intolerances", "");
           }}
         >
           {showFilters ? (
@@ -81,7 +86,7 @@ export const SearchForm = ({ onSuccess, initialSearchTerm }) => {
       </div>
       {showFilters && (
         <div className=" bg-[#EEE0CB] min-h-[5rem] w-full mt-2 p-2 rounded-lg">
-          <MultiSelect
+          <IntoleranceMultiSelect
             selectedValues={formik.values.intolerances}
             setSelectedValues={(intolerances) =>
               formik.setFieldValue("intolerances", intolerances)
@@ -92,6 +97,3 @@ export const SearchForm = ({ onSuccess, initialSearchTerm }) => {
     </form>
   );
 };
-
-{
-}

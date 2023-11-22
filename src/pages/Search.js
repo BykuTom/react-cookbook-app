@@ -15,13 +15,19 @@ export const Search = () => {
 
   const { data, isLoading, error } = useRecipeSearch([searchTerm, filterTerm]);
 
-  const onSuccess = ([{ query }, filters]) => {
-    console.log(query);
-    //console.log(filters); // filters to be fixed
-    setSearchParams({ q: query }, { f: filters });
+  const onSuccess = ([query, filters]) => {
+    setSearchParams({
+      q: query,
+      ...(filters &&
+        Object.keys(filters).length !== 0 && {
+          f: utils.encodeURIObject(filters),
+        }),
+    });
 
     setSearchTerm(query);
-    /*  setFilterTerm([filters]); */
+    if (Object.keys(filters).length !== 0) {
+      setFilterTerm(filters);
+    } else setFilterTerm(undefined);
   };
 
   return (
