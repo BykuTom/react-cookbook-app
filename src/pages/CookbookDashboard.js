@@ -1,4 +1,3 @@
-import { CommunityCategories } from "../components/community/CommunityCategories";
 import { CommunityResults } from "../components/community/CommunityResults";
 import { CommunitySearch } from "../components/community/CommunitySearch";
 

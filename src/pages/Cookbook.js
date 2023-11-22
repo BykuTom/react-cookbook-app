@@ -98,8 +98,8 @@ export const Cookbook = () => {
         )}
         {currentTab === "Reviews" && (
           <div className="p-2 bg-[#EEE0CB] rounded-lg h-full flex flex-col gap-2">
-            <WriteReviewForm />
-            <ReviewDisplay />
+            <WriteReviewForm cookbookID={cookbookID} />
+            <ReviewDisplay cookbookID={cookbookID} />
           </div>
         )}
       </div>

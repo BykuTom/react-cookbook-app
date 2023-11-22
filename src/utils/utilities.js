@@ -98,3 +98,15 @@ export const averageRating = (cookbook) => {
 
   return overallScore / numberOfUniqueRatings;
 };
+
+export const getUserByID = (userID) => {
+  const user = userData.find((user) => user.id === userID);
+
+  return user;
+};
+export const getCookbookByID = (cookbookID) => {
+  const cookbooks = getFromLocalStorage("cookbooks", []);
+  const cookbook = cookbooks.find((cookbook) => cookbook.id === cookbookID);
+
+  return cookbook;
+};

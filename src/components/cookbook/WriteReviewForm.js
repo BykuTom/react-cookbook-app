@@ -1,37 +1,35 @@
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useApp } from "../../context/AppProvider";
-
-export const WriteReviewForm = () => {
+import { format } from "date-fns";
+export const WriteReviewForm = ({ cookbookID }) => {
   const { state, dispatch } = useApp();
 
   const formik = useFormik({
     initialValues: {
-      name: "",
+      text: "",
     },
-    onSubmit: ({ name, description }) => {
-      const newCookBook = {
-        id: crypto.randomUUID(),
+    onSubmit: ({ text }) => {
+      const review = {
         author: state.user.id,
-        name: name,
-        description: description,
-        items: [],
+        text: text,
+        date: `${format(new Date(), "HH:mm")}  ${format(
+          new Date(),
+          "dd/MM/yyyy"
+        )}`,
         likes: [],
-        comments: [],
-        rating: [],
       };
 
-      dispatch({ type: "CREATE_NEW_COOKBOOK", payload: newCookBook });
+      dispatch({
+        type: "UPLOAD_REVIEW",
+        payload: { reviewObject: review, cookbookID: cookbookID },
+      });
     },
     validationSchema: Yup.object({
-      name: Yup.string()
-        .required("Cookbook name is required")
-        .min(4, "Cookbook's name needs to be four characters or longer")
-        .max(20, "Cookbooks title should be shorter than twenty characters"),
-      description: Yup.string().max(
-        150,
-        "Description cannot be longer than 150 characters"
-      ),
+      text: Yup.string()
+        .required("You need to include review to submit review.")
+        .min(10, "Review needs to be longer than 10 characters")
+        .max(750, "Review needs to be under 750 characters long."),
     }),
   });
 
@@ -43,14 +41,31 @@ export const WriteReviewForm = () => {
           alt=""
         />
       </div>
-      <div className="flex flex-col gap-1 w-full max-w-[40rem] items-end">
-        <textarea
-          className="w-full bg-orange-200 min-h-[4rem] rounded-lg p-2 resize-none  placeholder:text-stone-600"
-          placeholder="Leave a review!"
-        ></textarea>
-        <button className="btn h-[1.5rem] bg-[#FE5F55] px-2 flex flex-row gap-1">
-          Submit Review
-        </button>
+      <div className="w-full max-w-[40rem] ">
+        <form
+          className="w-full flex flex-col gap-1 items-end"
+          onSubmit={formik.handleSubmit}
+        >
+          <textarea
+            className="w-full bg-orange-200 min-h-[6rem] md:min-h-[4rem] rounded-lg p-2 resize-none  placeholder:text-stone-600"
+            name="text"
+            placeholder="Leave a review!"
+            value={formik.values.text}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+          ></textarea>
+          {formik.errors.text ? (
+            <span className="text-sm text-error">
+              {formik.errors.text && formik.touched.text && formik.errors.text}
+            </span>
+          ) : null}
+          <button
+            type="submit"
+            className="btn h-[1.5rem] bg-[#FE5F55] px-2 flex flex-row gap-1"
+          >
+            Submit Review
+          </button>
+        </form>
       </div>
     </div>
   );

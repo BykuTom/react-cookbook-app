@@ -114,5 +114,33 @@ export const appReducer = (state, action) => {
     };
   }
 
+  if (action.type === "UPLOAD_REVIEW") {
+    const { reviewObject, cookbookID } = action.payload;
+
+    const newCookbooks = state.cookbooks.map((cookbook) => {
+      if (cookbook.id === cookbookID) {
+        if (cookbook.rating) {
+          const exitstingReviewIndex = cookbook.comments.findIndex(
+            (comments) => comments.author === reviewObject.author
+          );
+          if (exitstingReviewIndex !== -1) {
+            cookbook.comments[exitstingReviewIndex] = reviewObject;
+          } else {
+            cookbook.comments.push(reviewObject);
+          }
+        } else cookbook.comments = [reviewObject];
+
+        return cookbook;
+      } else return cookbook;
+    });
+
+    localStorage.setItem("cookbooks", JSON.stringify(newCookbooks));
+
+    return {
+      ...state,
+      cookbooks: newCookbooks,
+    };
+  }
+
   return state;
 };
