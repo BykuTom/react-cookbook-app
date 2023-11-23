@@ -20,9 +20,11 @@ export const Home = () => {
   error && console.log(error); */
 
   return (
-    <div className="min-w-screen min-h-screen bg-orange-50">
-      <HeroBanner />
-      <AboutUs />
+    <div className="bg-orange-50 w-full">
+      <div className="min-w-screen min-h-screen max-w-[90rem] mx-auto">
+        <HeroBanner />
+        <AboutUs />
+      </div>
     </div>
   );
 };
