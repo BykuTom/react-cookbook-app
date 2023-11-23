@@ -15,6 +15,11 @@ export const appReducer = (state, action) => {
   if (action.type === "ADD_RECIPE_TO_COOKBOOK") {
     const newCookbooks = state.cookbooks.map((cookbook) => {
       if (cookbook.id === action.payload.cookbookID) {
+        if (
+          cookbook.items.some((item) => item.id === action.payload.recipe.id)
+        ) {
+          return cookbook;
+        }
         return {
           ...cookbook,
           items: [action.payload.recipe, ...cookbook.items],
