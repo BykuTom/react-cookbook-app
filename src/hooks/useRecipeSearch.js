@@ -46,8 +46,8 @@ export const useRecipeSearch = ([query, filters]) => {
               "X-RapidAPI-Host": process.env.REACT_APP_X_RAPID_API_HOST,
             },
             params: params,
-          }); */
-
+          });
+ */
           const response = { status: 200, data: mockSearchResponse };
 
           if (response.status !== 200) {

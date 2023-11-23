@@ -39,7 +39,11 @@ export const RecipeCard = ({ recipe, variant, cookbookID, setShowAlert }) => {
         recipe={recipe}
         setShowAlert={setShowAlert}
       />
-      <img src={recipe.image} alt="" />
+      {recipe.image ? (
+        <img src={recipe.image} alt="" />
+      ) : (
+        <div className=" skeleton"></div>
+      )}
       <div className="card-body py-4 sm:flex sm:flex-col sm:flex-grow">
         <div className="flex flex-row justify-between text-center">
           <h2 className="card-header text-black text-left">{recipe.title}</h2>

@@ -1,6 +1,6 @@
 import React from "react";
 import noUser from "../../assets/images/nouser.png";
-import tomaszImg from "../../assets/images/tomasz.jpg";
+import tomaszImg from "../../assets/images/tomasz.png";
 import pizzaIcon from "../../assets/images/pizza.png";
 import cakeIcon from "../../assets/images/birthday.png";
 import { CpuChipIcon, ComputerDesktopIcon } from "@heroicons/react/24/outline";
