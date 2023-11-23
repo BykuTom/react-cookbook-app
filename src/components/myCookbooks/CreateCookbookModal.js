@@ -25,6 +25,7 @@ export const CreateCookBookModal = ({ isOpen, closeModal }) => {
       };
 
       dispatch({ type: "CREATE_NEW_COOKBOOK", payload: newCookBook });
+      formik.resetForm();
     },
     validationSchema: Yup.object({
       name: Yup.string()
@@ -110,8 +111,6 @@ export const CreateCookBookModal = ({ isOpen, closeModal }) => {
                       type="submit"
                       className="btn btn-warning mt-4"
                       onClick={() => {
-                        formik.resetForm();
-
                         closeModal();
                       }}
                     >

@@ -9,11 +9,13 @@ import { useEffect } from "react";
 export const Login = () => {
   const { state, dispatch } = useApp();
   const navigate = useNavigate();
+  console.log(state);
   const formik = useFormik({
     initialValues: {
       email: "",
       password: "",
     },
+
     onSubmit: ({ email, password }) => {
       const user = userData.find(
         (user) => user.email === email && user.password === password
