@@ -4,7 +4,7 @@ import { useApp } from "../../context/AppProvider";
 import { useNavigate } from "react-router-dom";
 import { parseToHTML } from "../../utils/utilities";
 
-export const RecipeCard = ({ recipe, variant, cookbookID }) => {
+export const RecipeCard = ({ recipe, variant, cookbookID, setShowAlert }) => {
   const navigate = useNavigate();
   const { dispatch } = useApp();
   const [isOpen, setIsOpen] = useState(false);
@@ -37,12 +37,15 @@ export const RecipeCard = ({ recipe, variant, cookbookID }) => {
         isOpen={isOpen}
         closeModal={closeModal}
         recipe={recipe}
+        setShowAlert={setShowAlert}
       />
       <img src={recipe.image} alt="" />
       <div className="card-body py-4 sm:flex sm:flex-col sm:flex-grow">
         <div className="flex flex-row justify-between text-center">
           <h2 className="card-header text-black text-left">{recipe.title}</h2>
-          <h2 className=" card-header text-black">{recipe.readyInMinutes} mins</h2>
+          <h2 className=" card-header text-black">
+            {recipe.readyInMinutes} mins
+          </h2>
         </div>
         <p className="text-black">{parseToHTML(string)}</p>
         <div className="card-footer flex flex-col gap-2 justify-center w-full sm:mt-auto sm:flex-row">

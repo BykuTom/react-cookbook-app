@@ -4,7 +4,12 @@ import { useApp } from "../../context/AppProvider";
 import { RadioGroup } from "@headlessui/react";
 import { CreateCookBookModal } from "../myCookbooks/CreateCookbookModal";
 
-export const AddToCookbookModal = ({ isOpen, closeModal, recipe }) => {
+export const AddToCookbookModal = ({
+  isOpen,
+  closeModal,
+  recipe,
+  setShowAlert,
+}) => {
   const { state, dispatch } = useApp();
   const [current, setCurrent] = useState("None");
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
@@ -110,6 +115,7 @@ export const AddToCookbookModal = ({ isOpen, closeModal, recipe }) => {
                             recipe: recipe,
                           },
                         });
+                        setShowAlert(true);
                         closeModal();
                       }}
                     >

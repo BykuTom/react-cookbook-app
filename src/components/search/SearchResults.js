@@ -2,7 +2,7 @@ import ReactPaginate from "react-paginate";
 import { RecipeCard } from "./RecipeCard";
 import { useEffect, useState } from "react";
 
-export const SearchResults = ({ results }) => {
+export const SearchResults = ({ results, setShowAlert }) => {
   const [currentItems, setCurrentItems] = useState([]);
   const [pageCount, setPageCount] = useState(0);
   const [itemOffset, setItemOffset] = useState(0);
@@ -23,7 +23,13 @@ export const SearchResults = ({ results }) => {
     <>
       <div className="flex flex-wrap gap-4 justify-evenly">
         {currentItems.map((result) => {
-          return <RecipeCard key={result.id} recipe={result} />;
+          return (
+            <RecipeCard
+              key={result.id}
+              recipe={result}
+              setShowAlert={setShowAlert}
+            />
+          );
         })}
       </div>
       <ReactPaginate
