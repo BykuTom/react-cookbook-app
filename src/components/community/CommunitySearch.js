@@ -1,4 +1,4 @@
-export const CommunitySearch = () => {
+export const CommunitySearch = ({ setSearchQuery }) => {
   return (
     <div className=" w-full bg-orange-100 rounded-lg p-2">
       <form className="relative max-w-[60rem] mx-auto">
@@ -7,6 +7,10 @@ export const CommunitySearch = () => {
           placeholder="Search for cookbooks!"
           required
           name="query"
+          onChange={(event) => {
+            event.preventDefault();
+            setSearchQuery(event.target.value);
+          }}
         />
         <button
           type="submit"

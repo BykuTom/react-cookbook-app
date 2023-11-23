@@ -1,13 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { Rating } from "react-simple-star-rating";
-import { useState } from "react";
-import { useApp } from "../../context/AppProvider";
-import { getAuthor, handleRating, averageRating } from "../../utils/utilities";
+import { getAuthor, averageRating } from "../../utils/utilities";
 
 export const CommunityCookbookCard = ({ cookbook }) => {
-  const { state, dispatch } = useApp();
-
-  const [rating, setRating] = useState(averageRating(cookbook));
   const navigate = useNavigate();
 
   return (
@@ -27,15 +22,12 @@ export const CommunityCookbookCard = ({ cookbook }) => {
               {cookbook?.name || "Cookbook Title Goes here"}
             </h2>
             <Rating
-              onClick={(event) => {
-                handleRating(event, state, dispatch, cookbook, setRating);
-              }}
               size={36}
               className="flex flex-row "
               transition
               allowFraction
-              readonly={!state.user}
-              initialValue={rating}
+              readonly
+              initialValue={averageRating(cookbook)}
             />
           </div>
         </div>

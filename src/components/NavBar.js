@@ -69,10 +69,10 @@ export const NavBar = () => {
                 </Disclosure.Button>
               </div>
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-                <div className="flex flex-shrink-0 items-center">
+                <div className="flex flex-shrink-0 items-center overflow-hidden rounded-full">
                   <img
-                    className="h-8 w-auto"
-                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+                    className="h-10 w-auto"
+                    src="https://cdn.dribbble.com/users/146798/screenshots/2818074/media/9e64567eeeb0f8ddf909507d9fe019dd.png"
                     alt="Company logo"
                   />
                 </div>
@@ -97,7 +97,7 @@ export const NavBar = () => {
                         <span className="sr-only">Open user menu</span>
                         <img
                           className="h-8 w-8 rounded-full"
-                          src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                          src={state?.user?.avatarURL}
                           alt=""
                         />
                       </Menu.Button>

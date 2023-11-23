@@ -110,3 +110,14 @@ export const getCookbookByID = (cookbookID) => {
 
   return cookbook;
 };
+
+export const checkCommentStatusByID = (cookbookID, userID) => {
+  const cookbook = getCookbookByID(cookbookID);
+  const review = cookbook.comments.find((comment) => comment.author === userID);
+
+  if (review) {
+    return true;
+  } else {
+    return false;
+  }
+};

@@ -3,12 +3,18 @@ import { Rating } from "react-simple-star-rating";
 import { getUserByID } from "../../utils/utilities";
 
 export const ReviewCard = ({ rating, comment }) => {
+  const commentRating = rating.find((individualRating) => {
+    if (individualRating.author === comment.author) {
+      return individualRating;
+    }
+  });
+  console.log(commentRating);
   return (
-    <div className="flex flex-row gap-2 items-start md:w-[45rem]">
+    <div className="flex flex-row gap-2 items-start md:min-w-[45rem] md:w-fit">
       <div className="w-[4rem] aspect-square bg-gray-500 rounded-full overflow-hidden">
         <img
-          src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-          alt=""
+          src={getUserByID(comment.author).avatarURL}
+          alt={getUserByID(comment.author).username}
         />
       </div>
       <div className="flex flex-col w-full gap-1">
@@ -24,7 +30,7 @@ export const ReviewCard = ({ rating, comment }) => {
                 transition
                 allowFraction
                 readonly={true}
-                initialValue={rating || 0}
+                initialValue={commentRating.score || 0}
               />
             </div>
             <span className="bg-orange-200 p-1 rounded-lg">{comment.date}</span>

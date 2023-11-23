@@ -2,6 +2,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useApp } from "../../context/AppProvider";
 import { format } from "date-fns";
+import { checkCommentStatusByID } from "../../utils/utilities";
 export const WriteReviewForm = ({ cookbookID }) => {
   const { state, dispatch } = useApp();
 
@@ -36,10 +37,7 @@ export const WriteReviewForm = ({ cookbookID }) => {
   return (
     <div className="w-full p-2 bg-orange-100 rounded-lg h-fit flex flex-row gap-2 items-start">
       <div className="w-[4rem] aspect-square bg-gray-500 rounded-full overflow-hidden">
-        <img
-          src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-          alt=""
-        />
+        <img src={state.user.avatarURL} alt={state.user.username} />
       </div>
       <div className="w-full max-w-[40rem] ">
         <form
@@ -63,7 +61,9 @@ export const WriteReviewForm = ({ cookbookID }) => {
             type="submit"
             className="btn h-[1.5rem] bg-[#FE5F55] px-2 flex flex-row gap-1"
           >
-            Submit Review
+            {checkCommentStatusByID(cookbookID, state.user.id)
+              ? "Edit Review"
+              : "Submit Review"}
           </button>
         </form>
       </div>

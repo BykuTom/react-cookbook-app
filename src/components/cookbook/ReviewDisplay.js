@@ -5,10 +5,17 @@ export const ReviewDisplay = ({ cookbookID }) => {
   const cookbook = getCookbookByID(cookbookID);
 
   return (
-    <div className="w-full p-2 bg-orange-100 rounded-lg h-full">
+    <div className="w-full p-2 bg-orange-100 rounded-lg h-full gap-2 flex flex-col">
       {cookbook?.comments.map((comment) => {
-        return <ReviewCard rating={cookbook.rating.score} comment={comment} />;
+        return <ReviewCard rating={cookbook.rating} comment={comment} />;
       })}
+      {!cookbook.comments ||
+        (cookbook?.comments.length === 0 && (
+          <div className="w-full text-center py-4 text-error text-lg ">
+            There are no reviews on this cookbook yet, please consider leaving
+            one.
+          </div>
+        ))}
     </div>
   );
 };
