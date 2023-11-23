@@ -32,8 +32,8 @@ export const CreateCookBookModal = ({ isOpen, closeModal }) => {
         .min(4, "Cookbook's name needs to be four characters or longer")
         .max(20, "Cookbooks title should be shorter than twenty characters"),
       description: Yup.string().max(
-        150,
-        "Description cannot be longer than 150 characters"
+        250,
+        "Description cannot be longer than 250 characters"
       ),
     }),
   });
@@ -83,6 +83,13 @@ export const CreateCookBookModal = ({ isOpen, closeModal }) => {
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                   ></input>
+                  {formik.errors.name ? (
+                    <span className="text-sm text-red-400">
+                      {formik.errors.name &&
+                        formik.touched.name &&
+                        formik.errors.name}
+                    </span>
+                  ) : null}
                   <textarea
                     className="bg-white p-2 mt-2 text-black placeholder:text-stone-400 border-solid border-[1px] border-stone-600 rounded-md w-full min-h-[7rem] resize-none"
                     placeholder="New Cookbook's Description"
@@ -91,18 +98,33 @@ export const CreateCookBookModal = ({ isOpen, closeModal }) => {
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                   ></textarea>
+                  {formik.errors.description ? (
+                    <span className="text-sm text-red-400">
+                      {formik.errors.description &&
+                        formik.touched.description &&
+                        formik.errors.description}
+                    </span>
+                  ) : null}
                   <div className="flex flex-row gap-4 w-full justify-evenly">
                     <button
                       type="submit"
                       className="btn btn-warning mt-4"
-                      onClick={closeModal}
+                      onClick={() => {
+                        formik.resetForm();
+
+                        closeModal();
+                      }}
                     >
                       Create new Cookbook !
                     </button>
                     <button
                       type="button"
                       className="btn btn-error mt-4"
-                      onClick={closeModal}
+                      onClick={() => {
+                        formik.resetForm();
+
+                        closeModal();
+                      }}
                     >
                       Cancel
                     </button>
