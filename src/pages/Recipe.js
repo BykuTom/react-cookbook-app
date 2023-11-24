@@ -1,8 +1,7 @@
 import { useParams, useLocation } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useRecipeById } from "../hooks/useRecipeByID";
-import { BannerSlide } from "../components/home/BannerSlide";
-import { RecipeSteps } from "../components/RecipeSteps";
+import { RecipeBanner } from "../components/recipe/RecipeBanner";
 
 export const Recipe = () => {
   const { recipeID } = useParams();
@@ -35,19 +34,10 @@ export const Recipe = () => {
 
   console.log(recipe);
 
-  //{recipeFromState?.title}
-
   return (
     <div className="bg-orange-50">
       <div className="w-full min-h-[calc(100vh-7rem)] max-w-[90rem] mx-auto p-4 pt-10">
-        {recipe && (
-          <BannerSlide
-            title={recipe.title}
-            summary={recipe.summary}
-            image={recipe.image}
-            rating={5}
-          />
-        )}
+        {recipe && <RecipeBanner recipe={recipe} rating={5} />}
         <div className="divider divider-horizontal m-6 opacity-40 "></div>
         <div className="p-1">
           <div className="w-full min-h-[2rem] mt-4 flex flex-row gap-2 justify-center items-center">
