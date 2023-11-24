@@ -7,7 +7,13 @@ export const ReviewDisplay = ({ cookbookID }) => {
   return (
     <div className="w-full p-2 bg-orange-100 rounded-lg h-full gap-2 flex flex-col overflow-y-auto">
       {cookbook?.comments.map((comment) => {
-        return <ReviewCard rating={cookbook.rating} comment={comment} />;
+        return (
+          <ReviewCard
+            rating={cookbook.rating}
+            comment={comment}
+            cookbookID={cookbookID}
+          />
+        );
       })}
       {!cookbook.comments ||
         (cookbook?.comments.length === 0 && (

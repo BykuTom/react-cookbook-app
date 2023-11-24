@@ -1,14 +1,16 @@
 import { HandThumbUpIcon } from "@heroicons/react/24/outline";
 import { Rating } from "react-simple-star-rating";
 import { getUserByID } from "../../utils/utilities";
+import { useApp } from "../../context/AppProvider";
 
-export const ReviewCard = ({ rating, comment }) => {
+export const ReviewCard = ({ rating, comment, cookbookID }) => {
+  const { state, dispatch } = useApp();
   const commentRating = rating.find((individualRating) => {
     if (individualRating.author === comment.author) {
       return individualRating;
     }
   });
-  console.log(commentRating);
+  console.log(comment.likes.length);
   return (
     <div className="flex flex-row gap-2 items-start md:min-w-[45rem] md:w-fit">
       <div className="w-[4rem] aspect-square bg-gray-500 rounded-full overflow-hidden">
@@ -39,9 +41,29 @@ export const ReviewCard = ({ rating, comment }) => {
         <div className="w-full bg-orange-200 min-h-[4rem] rounded-lg p-2">
           {comment.text}
           <div className="w-full h-1rem flex flex-row gap-2 justify-end pr-2">
-            <button className="btn h-[1.5rem] bg-[#FE5F55] px-2 flex flex-row gap-1">
+            <button
+              className="btn h-[1.5rem] bg-[#FE5F55] px-2 flex flex-row gap-1"
+              onClick={
+                state.user
+                  ? () => {
+                      dispatch({
+                        type: "LIKE_REVIEW",
+                        payload: {
+                          comment: comment,
+                          cookbookID: cookbookID,
+                          userID: state.user.id,
+                        },
+                      });
+                    }
+                  : () => {}
+              }
+            >
               <HandThumbUpIcon className="block h-4 w-4" />
-              <span>Like</span> {/* Check if Like or unlike */}
+              <span>
+                {comment.likes.some((commentId) => commentId === state.user.id)
+                  ? "like"
+                  : "unlike"}
+              </span>
               <span>{`(${comment.likes.length || 0})`}</span>
             </button>
           </div>

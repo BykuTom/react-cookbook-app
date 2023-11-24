@@ -1,3 +1,4 @@
+import { comment } from "postcss";
 import { setToLocalStorage } from "../utils/utilities";
 
 export const appReducer = (state, action) => {
@@ -137,6 +138,43 @@ export const appReducer = (state, action) => {
 
         return cookbook;
       } else return cookbook;
+    });
+
+    localStorage.setItem("cookbooks", JSON.stringify(newCookbooks));
+
+    return {
+      ...state,
+      cookbooks: newCookbooks,
+    };
+  }
+
+  if (action.type === "LIKE_REVIEW") {
+    const { comment, cookbookID, userID } = action.payload;
+
+    const newCookbooks = state.cookbooks.map((cookbook) => {
+      if (cookbook.id === cookbookID) {
+        const updatedComments = cookbook.comments.map((com) => {
+          if (com.author === comment.author) {
+            const updatedComment = { ...com };
+
+            if (!com.likes.some((likeUserID) => likeUserID === userID)) {
+              updatedComment.likes = [...com.likes, userID];
+            } else {
+              updatedComment.likes = com.likes.filter(
+                (likeUserID) => likeUserID !== userID
+              );
+            }
+
+            return updatedComment;
+          }
+          return com;
+        });
+
+        if (updatedComments !== cookbook.comments) {
+          return { ...cookbook, comments: updatedComments };
+        }
+      }
+      return cookbook;
     });
 
     localStorage.setItem("cookbooks", JSON.stringify(newCookbooks));

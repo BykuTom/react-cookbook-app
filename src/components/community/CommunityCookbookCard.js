@@ -21,14 +21,19 @@ export const CommunityCookbookCard = ({ cookbook }) => {
             <h2 className="card-header text-center text-2xl">
               {cookbook?.name || "Cookbook Title Goes here"}
             </h2>
-            <Rating
-              size={36}
-              className="flex flex-row "
-              transition
-              allowFraction
-              readonly
-              initialValue={averageRating(cookbook)}
-            />
+            <div className="flex flex-row gap-1 items-center">
+              <span className="ml-auto">{`(${averageRating(cookbook)
+                .toString()
+                .slice(0, 4)})`}</span>
+              <Rating
+                size={36}
+                className="flex flex-row "
+                transition
+                allowFraction
+                readonly
+                initialValue={averageRating(cookbook)}
+              />
+            </div>
           </div>
         </div>
         <h3 className="mt-[-12px]">By: {getAuthor(cookbook)}</h3>
@@ -37,7 +42,6 @@ export const CommunityCookbookCard = ({ cookbook }) => {
         </p>
         <div className="divider divider-horizontal opacity-30 mx-6 my-0"></div>
         <div className="card-footer flex-col gap-2 justify-center">
-          <div>Social Buttons</div>
           <button
             className="bg-[#FE5F55] btn"
             onClick={() => {

@@ -52,7 +52,8 @@ export const Cookbook = () => {
                   }}
                 />
                 <div>
-                  ({rating}) based on {cookbook.rating.length} rating
+                  ({averageRating(cookbook).toString().slice(0, 4)}) based on{" "}
+                  {cookbook.rating.length} rating
                   {cookbook.rating.length > 1 && "s"}.
                 </div>
               </div>
