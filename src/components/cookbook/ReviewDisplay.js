@@ -5,7 +5,7 @@ export const ReviewDisplay = ({ cookbookID }) => {
   const cookbook = getCookbookByID(cookbookID);
 
   return (
-    <div className="w-full p-2 bg-orange-100 rounded-lg h-full gap-2 flex flex-col">
+    <div className="w-full p-2 bg-orange-100 rounded-lg h-full gap-2 flex flex-col overflow-y-auto">
       {cookbook?.comments.map((comment) => {
         return <ReviewCard rating={cookbook.rating} comment={comment} />;
       })}

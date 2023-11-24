@@ -7,6 +7,7 @@ import { CommunityDashboard } from "./pages/CommunityDashboard";
 import { MyCookbooks } from "./pages/MyCookbooks";
 import { Login } from "./pages/Login";
 import { Cookbook } from "./pages/Cookbook";
+import { Profile } from "./pages/Profile";
 
 export const AppRoutes = () => {
   return (
@@ -14,6 +15,7 @@ export const AppRoutes = () => {
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
       <Route path="/search" element={<Search />} />
+      <Route path="/profile" element={<Profile />} />
       <Route path="/community" element={<CommunityDashboard />} />
       <Route path="/community/:cookbookID" element={<Cookbook />} />
       <Route path="/mycookbooks" element={<MyCookbooks />} />

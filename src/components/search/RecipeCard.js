@@ -3,11 +3,13 @@ import { AddToCookbookModal } from "./AddToCookbookModal";
 import { useApp } from "../../context/AppProvider";
 import { useNavigate } from "react-router-dom";
 import { parseToHTML } from "../../utils/utilities";
+import { PleaseLoginDialog } from "../PleaseLogInDialog";
 
 export const RecipeCard = ({ recipe, variant, cookbookID, setShowAlert }) => {
   const navigate = useNavigate();
-  const { dispatch } = useApp();
+  const { state, dispatch } = useApp();
   const [isOpen, setIsOpen] = useState(false);
+  const [isLoginDialogOpen, setIsLoginDialogOpen] = useState(false);
 
   const handleRecipeNavigate = () => {
     navigate(`/recipe/${recipe.id}`, {
@@ -38,6 +40,11 @@ export const RecipeCard = ({ recipe, variant, cookbookID, setShowAlert }) => {
         closeModal={closeModal}
         recipe={recipe}
         setShowAlert={setShowAlert}
+      />
+      <PleaseLoginDialog
+        isOpen={isLoginDialogOpen}
+        setIsOpen={setIsLoginDialogOpen}
+        text="Please log in in order to add a recipe to cookbook!"
       />
       {recipe.image ? (
         <img src={recipe.image} alt="" />
@@ -79,7 +86,13 @@ export const RecipeCard = ({ recipe, variant, cookbookID, setShowAlert }) => {
             <button
               className="bg-[#64d97b] btn mx-auto font-bold text-lg p-1 w-full md:w-[50%] sm:w-auto drop-shadow hover:shadow-lg text-gray-800"
               type="button"
-              onClick={openModal}
+              onClick={
+                state.user
+                  ? openModal
+                  : () => {
+                      setIsLoginDialogOpen(true);
+                    }
+              }
             >
               Add to Cookbook
             </button>

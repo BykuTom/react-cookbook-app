@@ -30,7 +30,7 @@ export const ReviewCard = ({ rating, comment }) => {
                 transition
                 allowFraction
                 readonly={true}
-                initialValue={commentRating.score || 0}
+                initialValue={commentRating?.score || 0}
               />
             </div>
             <span className="bg-orange-200 p-1 rounded-lg">{comment.date}</span>

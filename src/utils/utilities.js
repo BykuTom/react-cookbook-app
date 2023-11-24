@@ -23,6 +23,7 @@ export const getFromLocalStorage = (key, defaultValue) => {
   const dataFromLS = localStorage.getItem(key);
 
   if (!dataFromLS) {
+    localStorage.setItem(key, JSON.stringify(defaultValue));
     return defaultValue;
   }
   return JSON.parse(dataFromLS);

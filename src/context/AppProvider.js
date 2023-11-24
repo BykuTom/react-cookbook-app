@@ -1,18 +1,14 @@
 import { createContext, useContext, useReducer, useEffect } from "react";
 import { appReducer } from "../reducer/appReducer";
-import {
-  getFromLocalStorage,
-  setToLocalStorage,
-  getCookie,
-  setCookie,
-} from "../utils/utilities";
+import { getFromLocalStorage, getCookie, setCookie } from "../utils/utilities";
+import { mockCookbooks } from "../assets/data/mockCookbookData";
 
 export const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
   const initialState = {
     myCookBooks: [],
-    cookbooks: getFromLocalStorage("cookbooks", []),
+    cookbooks: getFromLocalStorage("cookbooks", mockCookbooks),
     user: getCookie("user") || null,
   };
 

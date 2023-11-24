@@ -34,7 +34,7 @@ export const Cookbook = () => {
 
   return (
     <div className="bg-orange-50">
-      <div className="w-full h-[calc(100vh-4rem)] max-w-[90rem] mx-auto text-black p-2 flex flex-col gap-2">
+      <div className="w-full h-[calc(100vh-4rem)] max-w-[90rem] mx-auto text-black p-2 flex flex-col gap-2 overflow-hidden">
         {cookbook && (
           <div className="p-2 bg-[#EEE0CB] rounded-lg h-fit flex flex-col gap-2">
             <div className="w-full flex flex-col sm:flex-row gap-2">
@@ -83,7 +83,7 @@ export const Cookbook = () => {
         )}
 
         {currentTab === "Recipes" && (
-          <div className="p-2 bg-[#EEE0CB] rounded-lg items-center m flex flex-col overflow-y-auto md:flex-row md:flex-wrap md:justify-around gap-2">
+          <div className="p-2 bg-[#EEE0CB] rounded-lg items-center flex flex-col overflow-y-auto md:flex-row md:flex-wrap md:justify-around gap-2">
             {cookbook.items &&
               cookbook.items.map((item) => {
                 return (
@@ -97,7 +97,7 @@ export const Cookbook = () => {
           </div>
         )}
         {currentTab === "Reviews" && (
-          <div className="p-2 bg-[#EEE0CB] rounded-lg h-full flex flex-col gap-2">
+          <div className="p-2 bg-[#EEE0CB] rounded-lg  flex flex-col gap-2 overflow-y-auto">
             <WriteReviewForm cookbookID={cookbookID} />
             <ReviewDisplay cookbookID={cookbookID} />
           </div>
