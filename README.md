@@ -78,7 +78,7 @@ Navigate to http://localhost:3000
 
 ## Deployed Environment
 
-Navigate to http://localhost:3000
+Navigate to [Deployed Project](https://react-cookbook-app.vercel.app/)
 
 ## User Stories
 
@@ -147,9 +147,10 @@ Navigate to http://localhost:3000
 ## Screenshots
 
 ### Desktop
-
+![App Screenshot](https://github.com/BykuTom/Project-screenshots/blob/main/react-cookbook-app/DiscoverUltraWide.JPG?raw=true)
+![App Screenshot](https://github.com/BykuTom/Project-screenshots/blob/main/react-cookbook-app/CommunityHub1080.JPG?raw=true)
 ### Mobile
-
+![App Screenshot](https://github.com/BykuTom/Project-screenshots/blob/main/react-cookbook-app/DiscoverMobile.JPG?raw=true)
 ## References
 
 ### External Libraries and Tools
