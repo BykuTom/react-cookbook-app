@@ -2,6 +2,7 @@ import { HeroBanner } from "../components/home/HeroBanner";
 import { useRecipeSearch } from "../hooks/useRecipeSearch";
 import { AboutUs } from "../components/home/AboutUs";
 
+
 export const Home = () => {
   /* const query = "burgers";
   const filters = {

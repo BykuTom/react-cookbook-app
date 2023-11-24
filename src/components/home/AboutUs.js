@@ -17,7 +17,7 @@ export const AboutUs = () => {
           <img src={cakeIcon} className="w-10 h-10" alt="cakeicon" />
         </div>
 
-        <div className="px-10 mx-auto card my-2 p-2 h-100 items-center bg-orange-200 lg:min-w-[70rem] ">
+        <div className="px-10 mx-auto card my-2 p-2 h-100 items-center bg-orange-200 lg:min-w-[60rem] xl:min-w-[70rem] ">
           <h3 className="text-gray-800 text-2xl font-bold py-4 px-6 text-center">
             "Cookbook App: Where Every Recipe Comes with a Side of Punnery –
             Stirring Pots and Puns Since 2023!"
