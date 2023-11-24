@@ -10,7 +10,6 @@ export const ReviewCard = ({ rating, comment, cookbookID }) => {
       return individualRating;
     }
   });
-  console.log(comment.likes.length);
   return (
     <div className="flex flex-row gap-2 items-start md:min-w-[45rem] md:w-fit">
       <div className="w-[4rem] aspect-square bg-gray-500 rounded-full overflow-hidden">
@@ -60,7 +59,7 @@ export const ReviewCard = ({ rating, comment, cookbookID }) => {
             >
               <HandThumbUpIcon className="block h-4 w-4" />
               <span>
-                {comment.likes.some((commentId) => commentId === state.user.id)
+                {!comment.likes.some((commentId) => commentId === state.user.id)
                   ? "like"
                   : "unlike"}
               </span>
