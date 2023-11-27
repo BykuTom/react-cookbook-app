@@ -4,7 +4,7 @@
 A cookbook app written in React.
 
 ## Authors
-- [Tomasz Wolak](https://github.com/BykuTom)
+- [Tomasz Wolak](https://github.com/BykuTom) (Team Leader)
 - [Artursrus](https://github.com/artursrus)
 
 ## Features
