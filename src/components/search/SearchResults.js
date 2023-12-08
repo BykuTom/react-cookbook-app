@@ -40,7 +40,7 @@ export const SearchResults = ({ results, setShowAlert }) => {
         pageRangeDisplayed={3}
         pageCount={pageCount}
         renderOnZeroPageCount={null}
-        containerClassName="text-black flex flex-row gap-1 mt-4"
+        containerClassName="text-black flex flex-row flex-wrap justify-center gap-1 mt-4 max-w-screen"
         pageClassName="btn bg-[#FE5F55] relative"
         pageLinkClassName="absolute inset-0 flex items-center justify-center"
         previousClassName="btn bg-[#FE5F55] relative min-w-[calc(10ch+1.5rem)]"
